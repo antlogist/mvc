@@ -1,4 +1,4 @@
 <?php
 require_once __DIR__ . "/../app/config/_env.php";
 
-$app_name = $_ENV['APP_NAME'];
+require_once __DIR__ . "/../app/routing/routes.php";
