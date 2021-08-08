@@ -1,8 +1,8 @@
 /vendor/
-/composer.lock
 /.env
 /package-lock.json
 /node_modules/
 /resources/assets/bower/vendor/
 /mix-manifest.json
 /main.js
+/composer.lock
