@@ -1,6 +1,11 @@
 DirectoryIndex public/index.php 
 RewriteEngine On  
-RewriteCond %{REQUEST_FILENAME} !-f 
+
+#if requested file is not a real file
+RewriteCond %{REQUEST_FILENAME} !-f
+#if requested file is not a real diectory
 RewriteCond %{REQUEST_FILENAME} !-d 
 RewriteCond %{REQUEST_FILENAME} !-l  
+
+#redirect all request to index.php
 ReWriteRule ^ ./public/index.php?q=$1 [QSA,L]

@@ -2,5 +2,10 @@
 
 require_once __DIR__ . "/../bootstrap/init.php";
 
-$app_name = $_ENV['APP_NAME'];
-echo $app_name;
+use Illuminate\Database\Capsule\Manager as Capsule;
+
+$category = Capsule::select('SELECT * FROM categories');
+
+echo "<pre>";
+var_dump($category);
+echo "</pre>";

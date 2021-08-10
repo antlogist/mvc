@@ -1,0 +1,16 @@
+{
+  "name": "mvc",
+  "description": "MVC architecture example",
+  "main": "",
+  "authors": [
+    "Anton Podlesnyy"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/antlogist/mvc",
+  "private": true,
+  "dependencies": {
+    "foundation-sites": "^6.6.3",
+    "motion-ui": "^2.0.3",
+    "slick-carousel": "^1.8.1"
+  }
+}
