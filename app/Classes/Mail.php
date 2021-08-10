@@ -40,9 +40,20 @@ class Mail {
 	}
 	
 	function send($data) {
+		$body = '<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	email body
+</body>
+</html>'
+		
 		$this->mail->addAddress($data["to"], $data["name"]);
 		$this->mail->Subject = $data["subject"];
-		$this->mail->Body = "";
+		$this->mail->Body = $body;
 	}
 	
 }
