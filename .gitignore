@@ -5,4 +5,4 @@
 /resources/assets/bower/vendor/
 /mix-manifest.json
 /main.js
-/composer.lock
+/.lock
