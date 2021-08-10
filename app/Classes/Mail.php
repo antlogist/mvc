@@ -2,13 +2,14 @@
 
 namespace App\Classes;
 
-use PHPMailer;
+//use PHPMailer;
+use PHPMailer\PHPMailer\PHPMailer;
 	
 class Mail {
 	protected $mail;
 	
 	function __construct() {
-		$this->mail = new PHPMiler();
+		$this->mail = new PHPMailer();
 		$this->setUp();
 	}
 	
@@ -24,7 +25,7 @@ class Mail {
 		$environment = $_SERVER["APP_ENV"];
 		
 		if ($environment === "local") {
-			$this->mail->SMTPDebug = 2;
+			$this->mail->SMTPDebug = "";
 		}
 		
 		//auth info
@@ -35,14 +36,18 @@ class Mail {
 		$this->mail->SingleTo = true;
 		
 		//sender info
-		$this->mail->From = $_SERVER("ADMIN_EMAIL");
+		$this->mail->From = $_SERVER["ADMIN_EMAIL"];
+		
 		$this->mail->FromName = "MVC_Store";
 	}
 	
 	function send($data) {
+		
 		$this->mail->addAddress($data["to"], $data["name"]);
 		$this->mail->Subject = $data["subject"];
-		$this->mail->Body = "";
+		$this->mail->Body = make($data["view"], array("data" => $data["body"]));
+		
+		return $this->mail->send();
 	}
 	
 }
