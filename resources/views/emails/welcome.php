@@ -5,6 +5,6 @@
 	<title>Document</title>
 </head>
 <body>
-	email body
+	email body <?php echo $data; ?>
 </body>
 </html>
