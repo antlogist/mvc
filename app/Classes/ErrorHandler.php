@@ -8,11 +8,10 @@ class ErrorHandler() {
 		
 		$environment = $_SERVER["APP_ENV"];
 		
-		if($environment === "local") {
-			$whoops = new \Whoops\Run;
-			$whoops->pushHandler(new \Whoops\Handler\PrettyPageHandler);
-			$whoops->register();
-		}
+	if($environment === "local") {
+		$whoops = new \Whoops\Run;
+		$whoops->pushHandler(new \Whoops\Handler\PrettyPageHandler);
+		$whoops->register();
 	} else {
 		$data = [
 			"to" => $_SERVER["ADMIN_EMAIL"],
