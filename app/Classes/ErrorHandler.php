@@ -8,19 +8,20 @@ class ErrorHandler() {
 		
 		$environment = $_SERVER["APP_ENV"];
 		
-	if($environment === "local") {
-		$whoops = new \Whoops\Run;
-		$whoops->pushHandler(new \Whoops\Handler\PrettyPageHandler);
-		$whoops->register();
-	} else {
-		$data = [
-			"to" => $_SERVER["ADMIN_EMAIL"],
-			"subject" => "System Error",
-			"view" => "errors",
-			"name" => "Admin",
-			"body" => $error
-		];
-		ErrorHandler::emailAdmin($data)->outputFriendlyError();
+		if($environment === "local") {
+			$whoops = new \Whoops\Run;
+			$whoops->pushHandler(new \Whoops\Handler\PrettyPageHandler);
+			$whoops->register();
+		} else {
+			$data = [
+				"to" => $_SERVER["ADMIN_EMAIL"],
+				"subject" => "System Error",
+				"view" => "errors",
+				"name" => "Admin",
+				"body" => $error
+			];
+			ErrorHandler::emailAdmin($data)->outputFriendlyError();
+		}
 	}
 	
 	function outputFriendlyError() {
