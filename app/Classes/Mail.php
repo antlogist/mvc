@@ -49,5 +49,4 @@ class Mail {
 		
 		return $this->mail->send();
 	}
-	
 }

@@ -15,6 +15,7 @@ function view($path, array $data = []) {
 
 function make($filename, $data) {
 	
+	//array keys as variable names and values as variable values
 	extract($data);
 	
 	//turn on buffering
