@@ -1,7 +1,7 @@
 <?php
 namespace App\Classes;
 
-class ErrorHandler() {
+class ErrorHandler {
 	
 	function handleErrors($error_number, $error_message, $error_file, $error_line) {
 		$error = "[{$error_number}] An error occurred in file {$error_file} on line {$error_line}: {$error_message}";
