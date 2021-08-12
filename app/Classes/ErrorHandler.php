@@ -26,7 +26,7 @@ class ErrorHandler {
 	
 	function outputFriendlyError() {
 		ob_end_clean();
-		view("errors/generic/");
+		view("errors/generic");
 		exit;
 	}
 	
