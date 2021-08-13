@@ -14,5 +14,6 @@ const bower = "resources/assets/bower/vendor";
 mix.scripts([
   bower + "/jquery/dist/jquery.min.js",
   bower + "/foundation-sites/dist/js/foundation.min.js",
-  bower + "/slick-carousel/slick/slick.min.js"
+  bower + "/slick-carousel/slick/slick.min.js",
+	"resources/assets/js/*.js"
 ], "public/js/all.js");
