@@ -15,5 +15,5 @@ mix.scripts([
   bower + "/jquery/dist/jquery.min.js",
   bower + "/foundation-sites/dist/js/foundation.min.js",
   bower + "/slick-carousel/slick/slick.min.js",
-	"js/*.js"
+	"resources/assets/js/*.js"
 ], "public/js/all.js");
