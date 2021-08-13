@@ -6,23 +6,12 @@
 	<title>Admin panel - @yield("title")</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="./public/css/all.css">
+	<script src="https://use.fontawesome.com/bd91b9f588.js"></script>
 </head>
 
 <body>
-
-	<div class="off-canvas position-left reveal-for-large" id="offCanvas" data-off-canvas>
-
-		<!-- Menu -->
-		<ul class="vertical menu">
-			<li><a href="#">Foundation</a></li>
-			<li><a href="#">Dot</a></li>
-			<li><a href="#">ZURB</a></li>
-			<li><a href="#">Com</a></li>
-			<li><a href="#">Slash</a></li>
-			<li><a href="#">Sites</a></li>
-		</ul>
-
-	</div>
+	
+	@include("includes/admin-sidebar")
 
 	<div class="off-canvas-content" data-off-canvas-content>
 		<div class="title-bar">
