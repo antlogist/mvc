@@ -9,13 +9,13 @@ class IndexController extends BaseController {
 		
 		$mail = new Mail();
 	  	
-//		$data = [
-//			"to" => "test@test.com",
-//			"subject" => "Welcome to MVC store example",
-//			"view" => "welcome",
-//			"name" => "Anthony Underwood",
-//			"body" => "Email template"
-//		];
+		$data = [
+			"to" => "test@test.com",
+			"subject" => "Welcome to MVC store example",
+			"view" => "welcome",
+			"name" => "Anthony Underwood",
+			"body" => "Email template"
+		];
 
 		if($mail->send($data)) {
 			echo "Email send successfully!";
