@@ -5,7 +5,7 @@
 	<meta charset="UTF-8">
 	<title>Admin panel - @yield("title")</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" href="/css/all.css">
+	<link rel="stylesheet" href="./public/css/all.css">
 </head>
 
 <body>
@@ -29,7 +29,7 @@
 	</div>
 
 
-	<script src="/js/all.js"></script>
+	<script src="./public/js/all.js"></script>
 </body>
 
 </html>
