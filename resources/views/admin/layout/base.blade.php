@@ -13,7 +13,7 @@
 	
 	@include("includes/admin-sidebar")
 
-	<div class="off-canvas-content" data-off-canvas-content>
+	<div class="off-canvas-content admin_title_bar" data-off-canvas-content>
 		<div class="title-bar">
 			<div class="title-bar-left">
 				<button class="menu-icon hide-for-large" type="button" data-open="offCanvas"></button>
