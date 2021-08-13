@@ -6435,6 +6435,47 @@ html.is-reveal-open body {
   }
 }
 
+.nav {
+  background-color: darkslategray;
+}
+.nav .menu > li > a {
+  color: whitesmoke;
+  font-size: 1.2rem;
+}
+.nav .menu > li > a:hover, .nav .menu > li > a:focus, .nav .menu > li > a:active {
+  background-color: #203535;
+}
+.nav h3 {
+  color: whitesmoke;
+  font-size: 1.5rem;
+  text-align: center;
+  font-weight: 500;
+}
+.nav .image-holder {
+  padding: 0.7rem;
+  background-color: indianred;
+  text-align: center;
+}
+.nav .image-holder img {
+  border-radius: 50%;
+  border: 1px solid #200a0a;
+  padding: 0.3rem;
+  max-resolution: 0 auto;
+  height: 200px;
+  width: 200px;
+}
+.nav .image-holder p {
+  color: whitesmoke;
+  font-size: 0.9;
+}
+
+.admin_title_bar .title-bar {
+  background-color: lightgray;
+}
+.admin_title_bar .title-bar .title-bar-title {
+  color: black;
+}
+
 .slide-in-down.mui-enter {
   transition-duration: 500ms;
   transition-timing-function: linear;
