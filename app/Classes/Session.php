@@ -41,6 +41,14 @@ class Session {
     throw new \Exception("Name required");
   }
   
-  //remove session
+  /**
+   * remove session
+   * @param $name
+   */
+  static function remove($name) {
+    if(self::has($name)){
+      unset($_SESSION[$name]);
+    }
+  }
   
 }
