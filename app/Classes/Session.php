@@ -18,8 +18,14 @@ class Session {
     throw new \Exception("Name and value required");
   }
   
-  //get value from session
-  
+  /**
+   * get value from session
+   * @param $name
+   * @return mixed
+   */
+  static function get($name) {
+    return $_SESSION[$name];
+  }
   
   //check is session exists
   
