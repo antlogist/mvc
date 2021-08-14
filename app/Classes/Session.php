@@ -34,7 +34,7 @@ class Session {
    * @throws \Exception
    */
   static function has($name) {
-    if($name != "" && !empty($name) {
+    if($name != "" && !empty($name)) {
       return (isset($_SESSION[$name])) ? true : false;
     }
        
