@@ -27,8 +27,19 @@ class Session {
     return $_SESSION[$name];
   }
   
-  //check is session exists
-  
+  /**
+   * check session
+   * @param $name
+   * @return bool
+   * @throws \Exception
+   */
+  static function has($name) {
+    if($name != "" && !empty($name) {
+      return (isset($_SESSION[$name])) ? true : false;
+    }
+       
+    throw new \Exception("Name required");
+  }
   
   //remove session
   
