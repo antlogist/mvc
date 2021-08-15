@@ -49,8 +49,25 @@ class UploadFile {
    * @return bool
    */
   static function fileSize($file) {
+    // in the static method we cannot use this
     $fileobj = new static;
-//    return $file > $fileobj->max_filesize ? Session::add("Error", "File is larger than {$fileobj->max_filesize}") : "";
     return $file > $fileobj->max_filesize ? true : false;
+  }
+  
+  /**
+   * Validate upload file
+   * @param $file
+   * @return boolean
+   */
+  static function isImage($file) {
+    $fileobj = new static;
+    $ext = $fileobj->fileExtension($file);
+    $validExt = array("jpg", "jpeg", "png", "bmp", "gif");
+    
+    if (!in_array(strtolower($ext), $validExt)) {
+      return false;
+    }
+    
+    return true;
   }
 }
