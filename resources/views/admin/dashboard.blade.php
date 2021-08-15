@@ -6,5 +6,9 @@
 	<div class="dashboard expanded">
 		<h2>Dashboard</h2>
 		{{ $admin }}
+		<br>
+		{{ \App\Classes\CSRFToken::_token() }}
+		<br>
+		{!! \App\Classes\Session::get("token") !!}
 	</div>
 @endsection
