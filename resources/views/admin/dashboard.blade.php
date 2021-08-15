@@ -16,5 +16,7 @@
 		{!! \App\Classes\Session::get("token") !!}
 		<br>
 		{!! \App\Classes\CSRFToken::verifyCSRFToken($_SESSION["token"]) !!}
+		<br>
+		{{ $_SERVER["REQUEST_URI"] }}
 	</div>
 @endsection
