@@ -3,10 +3,11 @@
 namespace App\Controllers\Admin;
 
 use App\Classes\Session;
+use App\Classes\Request;
 use App\Controllers\BaseController;
 
 class DashboardController extends BaseController {
-	public function show() {
+	function show() {
       Session::add("admin", "You are welcome!");
       
       if (Session::has("admin")) {
@@ -17,4 +18,8 @@ class DashboardController extends BaseController {
       
       return view("admin/dashboard", ["admin" => $msg]);
 	}
+  function get() {
+    $request = Request::all(true);
+    var_dump($request["file"]);
+  }
 }
