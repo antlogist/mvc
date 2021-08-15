@@ -19,7 +19,7 @@ class DashboardController extends BaseController {
       return view("admin/dashboard", ["admin" => $msg]);
 	}
   function get() {
-    $request = Request::all(true);
-    var_dump($request["file"]);
+    $request = Request::get("file");
+    var_dump($request);
   }
 }

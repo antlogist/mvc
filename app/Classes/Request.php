@@ -18,7 +18,16 @@ class Request {
     return json_decode(json_encode($result), $is_array);
     
   }
-  //get specific request type
+  /**
+   * get specific request type
+   * @param $key
+   * @return mixed
+   */
+  static function get($key) {
+    $object = new static;
+    $data = $object->all();
+    return $data->$key;
+  }
   
   //check request availability
   

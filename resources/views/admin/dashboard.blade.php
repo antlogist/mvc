@@ -24,6 +24,6 @@
 		  <input name="image" type="file">
 		  <input name="submit" value="Go" type="submit">
 		</form>
-		{{ \App\Classes\Request::all() }}
+		  {{ \App\Classes\Request::all() }}
 	</div>
 @endsection
