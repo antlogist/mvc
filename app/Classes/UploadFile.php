@@ -70,4 +70,12 @@ class UploadFile {
     
     return true;
   }
+  
+  /**
+   * Get the path where image was uploaded to
+   * @return mixed
+   */
+  function path() {
+    return $this->path;
+  }
 }
