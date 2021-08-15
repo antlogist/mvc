@@ -15,6 +15,11 @@ class UploadFile {
     return $this->filename;
   }
   
+  /**
+   * Set the name of the file
+   * @param $file
+   * @param [$name = ""]
+   */
   protected function setName($file, $name = "") {
     if ($name === "") {
       $name = pathinfo($file, PATHINFO_FILENAME);
@@ -29,8 +34,23 @@ class UploadFile {
     $this->filename = "{$name}-{$hash}.{$ext}";
   }
   
+  /**
+   * Set the file extension
+   * @param  $file
+   * @return mixed
+   */
   protected function fileExtension($file) {
     return $this->extension = pathinfo($file, PATHINFO_EXTENSION);
   }
   
+  /**
+   * Check the file size
+   * @param $file
+   * @return bool
+   */
+  static function fileSize($file) {
+    $fileobj = new static;
+//    return $file > $fileobj->max_filesize ? Session::add("Error", "File is larger than {$fileobj->max_filesize}") : "";
+    return $file > $fileobj->max_filesize ? true : false;
+  }
 }
