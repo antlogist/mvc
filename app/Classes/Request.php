@@ -30,6 +30,14 @@ class Request {
   }
   
   //check request availability
+  /**
+   * check request availability
+   * @param $key
+   * @return bool
+   */
+  static function has($key) {
+    return (array_key_exists($key, self::all(true))) ? true : false;
+  }
   
   //get request data
   
