@@ -42,7 +42,12 @@ class Request {
     return (array_key_exists($key, self::all(true))) ? true : false;
   }
   
-  //get request data
+  /**
+   * get request data
+   * @param $key
+   * @param $value
+   * @return mixed
+   */
   static function old($key, $value) {
     $object = new static;
     $data = $object->all();
@@ -50,4 +55,9 @@ class Request {
   }
   
   //refresh request
+  static function refresh() {
+    $_POST = [];
+    $_GET = [];
+    $_FILES = [];
+  }
 }

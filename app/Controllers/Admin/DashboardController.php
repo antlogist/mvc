@@ -19,6 +19,7 @@ class DashboardController extends BaseController {
       return view("admin/dashboard", ["admin" => $msg]);
 	}
   function get() {
+    Request::refresh();
     $data = Request::old("post", "product");
     var_dump($data);
     exit;
