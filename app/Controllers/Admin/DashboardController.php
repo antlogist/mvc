@@ -19,10 +19,16 @@ class DashboardController extends BaseController {
       return view("admin/dashboard", ["admin" => $msg]);
 	}
   function get() {
-    if (Request::has("file")) {
-      $request = Request::get("file");
-      var_dump($request); 
-    }
-    var_dump("posting doesn't exist");
+    $data = Request::old("post", "product");
+    var_dump($data);
+    exit;
+    
+//    if (Request::has("post")) {
+//      $request = Request::get("post");
+//      var_dump($request); 
+//    } else {
+//      var_dump("posting doesn't exist");
+//    }
+    
   }
 }

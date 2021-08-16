@@ -9,6 +9,10 @@ class Request {
    * @return mixed
    */
   static function all($is_array = false) {
+    /**
+    * When $is_array = true, JSON objects will be returned as associative arrays; 
+    * when false, JSON objects will be returned as objects
+    */
     $result = [];
     
     if (count($_GET) > 0) $result["get"] = $_GET;
@@ -29,7 +33,6 @@ class Request {
     return $data->$key;
   }
   
-  //check request availability
   /**
    * check request availability
    * @param $key
@@ -40,6 +43,11 @@ class Request {
   }
   
   //get request data
+  static function old($key, $value) {
+    $object = new static;
+    $data = $object->all();
+    return isset($data->$key->$value) ? $data->$key->$value : "";
+  }
   
   //refresh request
 }
