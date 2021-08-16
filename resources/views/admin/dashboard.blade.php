@@ -18,5 +18,12 @@
 		{!! \App\Classes\CSRFToken::verifyCSRFToken($_SESSION["token"]) !!}
 		<br>
 		{{ $_SERVER["REQUEST_URI"] }}
+		<br>
+		<form action="./admin" method="post" enctype="multipart/form-data">
+		  <input name="product" value="testing" type="text">
+		  <input name="image" type="file">
+		  <input name="submit" value="Go" type="submit">
+		</form>
+		  {{ \App\Classes\Request::all() }}
 	</div>
 @endsection
