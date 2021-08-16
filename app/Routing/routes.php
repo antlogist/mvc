@@ -10,6 +10,6 @@ $router->map("POST", "/mvc/admin", "App\Controllers\Admin\DashboardController@ge
 
 //Product management
 $router->map("GET", "/mvc/admin/product/categories", 
-             "App\Controllers\Admin\ProductCategory@show", "product_category");
+             "App\Controllers\Admin\ProductCategoryController@show", "product_category");
 $router->map("POST", "/mvc/admin/product/categories", 
-             "App\Controllers\Admin\ProductCategory@store", "create_product_category");
+             "App\Controllers\Admin\ProductCategoryController@store", "create_product_category");
