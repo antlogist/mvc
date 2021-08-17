@@ -5,7 +5,7 @@
 	<meta charset="UTF-8">
 	<title>Admin panel - @yield("title")</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" href="./public/css/all.css">
+	<link rel="stylesheet" href="<?php echo $_SERVER["APP_URL"] ?>/public/css/all.css">
 	<script src="https://use.fontawesome.com/bd91b9f588.js"></script>
 </head>
 
@@ -25,7 +25,7 @@
 	</div>
 
 
-	<script src="./public/js/all.js"></script>
+	<script src="<?php echo $_SERVER["APP_URL"] ?>/public/js/all.js"></script>
 </body>
 
 </html>

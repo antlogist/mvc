@@ -6,10 +6,7 @@ use App\Models\Category;
 class ProductCategoryController {
   function show() {
     $categories = Category::all();
-    echo "<pre>";
-    var_dump($categories);
-    echo "</pre>";
-    exit;
+    return view("admin/products/categories", compact("categories"));
   }
   
   function store() {
