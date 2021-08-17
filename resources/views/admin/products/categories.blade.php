@@ -6,8 +6,8 @@
 	<div class="dashboard expanded">
 		<h2>Product Categories</h2>
 		{{ $categories }}
-		<div class="row expanded">
-		  <div class="small-12 medium-6 column">
+		<div class="grid-x expanded">
+		  <div class="small-12 medium-6 cell">
 		    <form action="" method="post">
 		      <div class="input-group">
 		        <input type="text" class="input-group-field" placeholder="Search by name">
@@ -18,7 +18,7 @@
 		    </form>
 		  </div>
 		  
-		  <div class="small-12 medium-6 column">
+		  <div class="small-12 medium-6 cell">
 		    <form action="./admin/products/categories" method="post">
 		      <div class="input-group">
 		        <input type="text" name="name" class="input-group-field" placeholder="Category name">
