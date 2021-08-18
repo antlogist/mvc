@@ -5,7 +5,7 @@
 @section("content")
 <div class="dashboard expanded grid-container">
   <h2>Product Categories</h2>
-  {{ $categories }}
+  <p>{{ isset($message) ? $message : '' }}</p>
   <div class="grid-x grid-margin-x expanded">
     <div class="small-12 medium-6 cell">
       <form action="" method="post">
@@ -17,14 +17,13 @@
         </div>
       </form>
     </div>
-
     <div class="small-12 medium-6 cell">
-      <form action="./admin/products/categories" method="post">
+      <form action="<?php echo $_SERVER["APP_URL"] ?>/admin/product/categories" method="post">
         <div class="input-group">
           <input type="text" name="name" class="input-group-field" placeholder="Category name">
           <input type="hidden" name="token" value="{{ \App\Classes\CSRFToken::_token() }}">
           <div class="input-group-button">
-            <input type="button" class="button" value="Create">
+            <input type="submit" class="button" value="Create">
           </div>
         </div>
       </form>
