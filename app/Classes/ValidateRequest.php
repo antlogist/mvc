@@ -18,6 +18,10 @@ class ValidateRequest {
     "unique" => "The :attribute is already taken, please try another one",
   ];
   
+  /**
+   * @param array $dataAndValues, column and data to validate
+   * @param array $policies, the rules that validation must satisfy
+   */
   function abide(array $dataAndValues, array $policies) {
     foreach ($dateAndValues as $column => $value) {
       if (in_array($column, array_keys($policies))) {
@@ -31,10 +35,21 @@ class ValidateRequest {
     }
   }
   
+  /**
+   * Perform validation for the data and set error messages
+   * @param array $data
+   */
   private static function doValidation(array $data) {
     $column = $data["column"];
     foreach ($data["policies"] as $rule => $policy) {
       $valid = call_user_func_array([self::class, $rule], [$rule, $data["value"], $policy]);
+      if (!$valid) {
+        self::setError(
+          str_replace([":attribute", ":policy", "_"], 
+                      [$column, $policy, " "], 
+                      self::$error_messages[$rule]), $column;
+        );
+      }
     }
   }
 
@@ -99,6 +114,11 @@ class ValidateRequest {
     return true;
   }
   
+  /**
+   * Set specific error
+   * @param $error
+   * @param [$key = null]
+   */
   private static function setError($error, $key = null) {
     if($key) {
       self::$error[$key][] = $error;
