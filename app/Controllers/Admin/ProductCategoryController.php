@@ -18,15 +18,14 @@ class ProductCategoryController {
 //      $validator = new ValidateRequest();
 //      $data = $validator::unique("name", "JavaScript", "categories");
       
-      $data = ValidateRequest::maxLength("name", $request->name, 6);
+      $data = ValidateRequest::email("name", $request->name, true);
       
       if ($data) {
-        echo $data;
         echo "Good!";
         exit;
       } else {
         echo $data;
-        echo "Max length is 6"; 
+        echo "Invalid email address"; 
         exit;
       }
       
