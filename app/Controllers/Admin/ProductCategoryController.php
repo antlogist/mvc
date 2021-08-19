@@ -18,14 +18,14 @@ class ProductCategoryController {
 //      $validator = new ValidateRequest();
 //      $data = $validator::unique("name", "JavaScript", "categories");
       
-      $data = ValidateRequest::mixed("name", $request->name, true);
+      $data = ValidateRequest::string("name", $request->name, true);
       
       if ($data) {
         echo "Good!";
         exit;
       } else {
         echo $data;
-        echo "Invalid email address"; 
+        echo "Invalid string"; 
         exit;
       }
       

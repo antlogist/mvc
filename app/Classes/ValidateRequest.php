@@ -11,7 +11,6 @@ class ValidateRequest {
       //return false if value already exists
       return !Capsule::table($policy)->where($column, "=", $value)->exists();
     }
-    
     return true;
   }
   
@@ -23,7 +22,6 @@ class ValidateRequest {
      if ($value !== null && !empty(trim($value))) {
        return strlen($value) >= $policy;
      }
-    
     return true;
   }
   
@@ -31,7 +29,6 @@ class ValidateRequest {
      if ($value !== null && !empty(trim($value))) {
        return strlen($value) <= $policy;
      }
-    
     return true;
   }
   
@@ -39,7 +36,6 @@ class ValidateRequest {
      if ($value !== null && !empty(trim($value))) {
        return filter_var($value, FILTER_VALIDATE_EMAIL);
      }
-    
     return true;
   }
   
@@ -47,7 +43,13 @@ class ValidateRequest {
      if (!preg_match("/^[a-zA-Z0-9 .,_~\-!@#\&%\^\'\*\(\)]*$/", $value)) {
        return false;
      }
-    
+    return true;
+  }
+  
+  static function string($column, $value, $policy) {
+     if (!preg_match("/^[a-zA-Z ]*$/", $value)) {
+       return false;
+     }
     return true;
   }
   
