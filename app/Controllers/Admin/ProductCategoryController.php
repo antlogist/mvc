@@ -15,10 +15,9 @@ class ProductCategoryController {
   function store() {
     if (Request::has("post")) {
       $request = Request::get("post");
-//      $validator = new ValidateRequest();
-//      $data = $validator::unique("name", "JavaScript", "categories");
       
-      $data = ValidateRequest::numbers("name", $request->name, true);
+      $validator = new ValidateRequest;
+      $data = $validator->abide();
       
       if ($data) {
         echo "Good!";
