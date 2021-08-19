@@ -35,9 +35,17 @@ class ValidateRequest {
     return true;
   }
   
-  function email($column, $value, $policy) {
+  static function email($column, $value, $policy) {
      if ($value !== null && !empty(trim($value))) {
        return filter_var($value, FILTER_VALIDATE_EMAIL);
+     }
+    
+    return true;
+  }
+  
+  static function mixed($column, $value, $policy) {
+     if (!preg_match("/^[a-zA-Z0-9 .,_~\-!@#\&%\^\'\*\(\)]*$/", $value)) {
+       return false;
      }
     
     return true;
