@@ -6,6 +6,18 @@ use Illuminate\Database\Capsule\Manager as Capsule;
 
 class ValidateRequest {
   
+  private static $error = [];
+  private static $error_messages = [
+    "string" => "The :attribute field cannot contain numbers",
+    "required" => "The :attribute field field is required",
+    "minLength" => "The :attribute field must be a minimum of :policy characters",
+    "maxLength" => "The :attribute field must be a maximum of :policy characters",
+    "mixed" => "The :attribute field can contain letters, numbers, dash and space only",
+    "number" => "The :attribute field cannot contain letters e.g. 15.0, 15",
+    "email" => "Email address is not valid",
+    "unique" => "The :attribute is already taken, please try another one",
+  ];
+  
   function abide(array $dataAndValues, array $policies) {
     foreach ($dateAndValues as $column => $value) {
       if (in_array($column, array_keys($policies))) {
@@ -19,8 +31,11 @@ class ValidateRequest {
     }
   }
   
-  private static function doValidate() {
-    
+  private static function doValidation(array $data) {
+    $column = $data["column"];
+    foreach ($data["policies"] as $rule => $policy) {
+      $valid = call_user_func_array([self::class, $rule], [$rule, $data["value"], $policy]);
+    }
   }
 
   /**
