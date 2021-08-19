@@ -15,15 +15,19 @@ class ProductCategoryController {
   function store() {
     if (Request::has("post")) {
       $request = Request::get("post");
-      $validator = new ValidateRequest();
-      $data = $validator->unique("name", "JavaScript", "categories");
+//      $validator = new ValidateRequest();
+//      $data = $validator::unique("name", "JavaScript", "categories");
+      
+      $data = ValidateRequest::required("name", $request->name, true);
       
       if ($data) {
         echo $data;
-        echo "Good!";exit;
+        echo "Good!";
+        exit;
       } else {
         echo $data;
-        echo "Got the data"; exit;
+        echo "Field is required"; 
+        exit;
       }
       
       if (CSRFToken::verifyCSRFToken($request->token)) {

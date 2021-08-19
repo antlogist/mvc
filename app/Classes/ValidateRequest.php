@@ -15,6 +15,8 @@ class ValidateRequest {
     return true;
   }
   
-  
+  static function required($column, $value, $policy) {
+    return $value !== null && !empty(trim($value));
+  }
   
 }
