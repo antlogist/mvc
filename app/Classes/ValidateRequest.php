@@ -126,4 +126,20 @@ class ValidateRequest {
       self::$error = $error;
     }
   }
+  
+  /**
+   * Return true if there is validation error
+   * @return bool
+   */
+  function hasError() {
+    return count(self::$error) > 0 ? true : false;
+  }
+  
+  /**
+   * Return all validation errors
+   * @return array
+   */
+  function getErrorMessages() {
+    return self::$error;
+  }
 }
