@@ -18,7 +18,7 @@ class ProductCategoryController {
 //      $validator = new ValidateRequest();
 //      $data = $validator::unique("name", "JavaScript", "categories");
       
-      $data = ValidateRequest::required("name", $request->name, true);
+      $data = ValidateRequest::maxLength("name", $request->name, 6);
       
       if ($data) {
         echo $data;
@@ -26,7 +26,7 @@ class ProductCategoryController {
         exit;
       } else {
         echo $data;
-        echo "Field is required"; 
+        echo "Max length is 6"; 
         exit;
       }
       

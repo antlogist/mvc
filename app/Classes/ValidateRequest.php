@@ -19,4 +19,20 @@ class ValidateRequest {
     return $value !== null && !empty(trim($value));
   }
   
+  static function minLength($column, $value, $policy) {
+     if ($value !== null && !empty(trim($value))) {
+       return strlen($value) >= $policy;
+     }
+    
+    return true;
+  }
+  
+  static function maxLength($column, $value, $policy) {
+     if ($value !== null && !empty(trim($value))) {
+       return strlen($value) <= $policy;
+     }
+    
+    return true;
+  }
+  
 }
