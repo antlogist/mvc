@@ -99,4 +99,11 @@ class ValidateRequest {
     return true;
   }
   
+  private static function setError($error, $key = null) {
+    if($key) {
+      self::$error[$key][] = $error;
+    } else {
+      self::$error = $error;
+    }
+  }
 }
