@@ -53,4 +53,11 @@ class ValidateRequest {
     return true;
   }
   
+  static function numbers($column, $value, $policy) {
+     if (!preg_match("/^[0-9. ]*$/", $value)) {
+       return false;
+     }
+    return true;
+  }
+  
 }
