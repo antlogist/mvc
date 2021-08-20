@@ -45,17 +45,19 @@ function slug($value) {
 }
 
 function paginate($num_of_records, $total_records, $table_name, $object) {
-  $categories = [];
+//  $categories = [];
   $pages = new Paginator($num_of_records, "p");
   $pages->set_total($total_records);
   $data = Capsule::select("SELECT * FROM $table_name ORDER BY created_at DESC " . $pages->get_limit());
-  foreach($data as $item) {
-    array_push($categories, [
-      "id" => $item->id,
-      "name" => $item->name,
-      "slug" => $item->slug,
-      "added" => $item->created_at->toFormattedDateString()
-    ]);
-  }
-  return [$categories, $pages->page];
+  $categories = $object->transform($data);
+//  foreach($data as $item) {
+//    $added = new Carbon($item->created_at);
+//    array_push($categories, [
+//      "id" => $item->id,
+//      "name" => $item->name,
+//      "slug" => $item->slug,
+//      "added" => $added->toFormattedDateString()
+//    ]);
+//  }
+  return [$categories, $pages->page_links()];
 }
