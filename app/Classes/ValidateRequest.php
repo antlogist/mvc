@@ -15,7 +15,7 @@ class ValidateRequest {
     "mixed" => "The :attribute field can contain letters, numbers, dash and space only",
     "number" => "The :attribute field cannot contain letters e.g. 15.0, 15",
     "email" => "Email address is not valid",
-    "unique" => "The :attribute is already taken, please try another one",
+    "unique" => "The :attribute is already taken, please try another one"
   ];
   
   /**
@@ -23,14 +23,14 @@ class ValidateRequest {
    * @param array $policies, the rules that validation must satisfy
    */
   function abide(array $dataAndValues, array $policies) {
-    foreach ($dateAndValues as $column => $value) {
+    foreach ($dataAndValues as $column => $value) {
       if (in_array($column, array_keys($policies))) {
         //do validation
         self::doValidation([
           "column" => $column,
           "value"  => $value,
           "policies" => $policies[$column]
-        ])
+        ]);
       }
     }
   }
@@ -42,12 +42,15 @@ class ValidateRequest {
   private static function doValidation(array $data) {
     $column = $data["column"];
     foreach ($data["policies"] as $rule => $policy) {
-      $valid = call_user_func_array([self::class, $rule], [$rule, $data["value"], $policy]);
+      $valid = call_user_func_array([self::class, $rule], [$column, $data["value"], $policy]);
       if (!$valid) {
         self::setError(
-          str_replace([":attribute", ":policy", "_"], 
-                      [$column, $policy, " "], 
-                      self::$error_messages[$rule]), $column;
+          str_replace(
+            [":attribute", ":policy", "_"],
+            [$column, $policy, " "],
+            self::$error_messages[$rule]
+          ), 
+          $column
         );
       }
     }
@@ -123,7 +126,7 @@ class ValidateRequest {
     if($key) {
       self::$error[$key][] = $error;
     } else {
-      self::$error = $error;
+      self::$error[] = $error;
     }
   }
   
@@ -132,6 +135,10 @@ class ValidateRequest {
    * @return bool
    */
   function hasError() {
+    if (count(self::$error) > 0) {
+      return true;
+    }
+    return false; 
     return count(self::$error) > 0 ? true : false;
   }
   

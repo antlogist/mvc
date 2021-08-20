@@ -12,7 +12,7 @@ class ErrorHandler {
 			$whoops = new \Whoops\Run;
 			$whoops->pushHandler(new \Whoops\Handler\PrettyPageHandler);
 			$whoops->register();
-		} else {
+		} /*else {
 			$data = [
 				"to" => $_SERVER["ADMIN_EMAIL"],
 				"subject" => "System Error",
@@ -21,7 +21,7 @@ class ErrorHandler {
 				"body" => $error
 			];
 			ErrorHandler::emailAdmin($data)->outputFriendlyError();
-		}
+		}*/
 	}
 	
 	function outputFriendlyError() {

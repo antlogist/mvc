@@ -16,19 +16,19 @@ class ProductCategoryController {
     if (Request::has("post")) {
       $request = Request::get("post");
       
-      $validator = new ValidateRequest;
-      $data = $validator->abide();
-      
-      if ($data) {
-        echo "Good!";
-        exit;
-      } else {
-        echo $data;
-        echo "Invalid number"; 
-        exit;
-      }
-      
       if (CSRFToken::verifyCSRFToken($request->token)) {
+        
+        $rules = [
+          "name" => ["required" => true, "maxLength" => 5, "string" => true, "unique" => "categories"]
+        ];
+        
+        $validate = new ValidateRequest;
+        $validate->abide($_POST, $rules);
+        
+        if ($validate->hasError()) {
+          var_dump($validate->getErrorMessages());
+        }
+        
         //process form data
         Category::create([
           "name" => $request->name,
