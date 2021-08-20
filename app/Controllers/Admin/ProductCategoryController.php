@@ -27,6 +27,7 @@ class ProductCategoryController {
         
         if ($validate->hasError()) {
           var_dump($validate->getErrorMessages());
+          exit();
         }
         
         //process form data

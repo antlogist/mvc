@@ -135,10 +135,6 @@ class ValidateRequest {
    * @return bool
    */
   function hasError() {
-    if (count(self::$error) > 0) {
-      return true;
-    }
-    return false; 
     return count(self::$error) > 0 ? true : false;
   }
   
