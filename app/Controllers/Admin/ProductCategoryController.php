@@ -7,9 +7,15 @@ use App\Classes\CSRFToken;
 use App\Classes\ValidateRequest;
 
 class ProductCategoryController {
+  public $table_name = "categories";
   function show() {
-    $categories = Category::all();
-    return view("admin/products/categories", compact("categories"));
+    $total = Category::all()->count();
+    $object = new Category;
+    
+    //Assign variables as if they were an array
+    list($categories, $links) = paginate(3, $total, $this->table_name, $object);
+    
+    return view("admin/products/categories", compact("categories", "links"));
   }
   
   function store() {
@@ -27,6 +33,7 @@ class ProductCategoryController {
         
         if ($validate->hasError()) {
           var_dump($validate->getErrorMessages());
+          exit();
         }
         
         //process form data
