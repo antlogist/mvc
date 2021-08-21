@@ -23,26 +23,27 @@ class ProductCategoryController {
       $request = Request::get("post");
       
       if (CSRFToken::verifyCSRFToken($request->token)) {
-        
+        //Validation rules
         $rules = [
           "name" => ["required" => true, "maxLength" => 5, "string" => true, "unique" => "categories"]
         ];
-        
+        //Validation process
         $validate = new ValidateRequest;
         $validate->abide($_POST, $rules);
-        
+        //If has errors
         if ($validate->hasError()) {
           var_dump($validate->getErrorMessages());
           exit();
         }
-        
-        //process form data
+        //Process form data
         Category::create([
           "name" => $request->name,
           "slug" => slug($request->name),
         ]);
+        //Get all categories
         $categories = Category::all();
         $message = "Category created";
+        //Return view from helper
         return view("admin/products/categories", compact("categories", "message"));
       }
       throw new \Exception("Token mismatch");
