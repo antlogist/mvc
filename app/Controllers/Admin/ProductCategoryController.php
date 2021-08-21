@@ -57,6 +57,10 @@ class ProductCategoryController {
         //Get all categories
         $categories = Category::all();
         $message = "Category created";
+        //Count category
+        $total = Category::all()->count();
+        //Assign variables to the result of paginate function from helper
+        list($this->categories, $this->links) = paginate(3, $total, $this->table_name, new Category);
         //Return view from helper
         return view("admin/products/categories", [
           "categories" => $this->categories,
