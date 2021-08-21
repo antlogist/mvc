@@ -17,17 +17,17 @@ class ProductCategoryController {
     
     return view("admin/products/categories", compact("categories", "links"));
   }
-  
+
   function store() {
     if (Request::has("post")) {
       $request = Request::get("post");
-      
+      //Token validation
       if (CSRFToken::verifyCSRFToken($request->token)) {
         //Validation rules
         $rules = [
           "name" => ["required" => true, "maxLength" => 5, "string" => true, "unique" => "categories"]
         ];
-        //Validation process
+        //Cat name validation process
         $validate = new ValidateRequest;
         $validate->abide($_POST, $rules);
         //If has errors
@@ -48,7 +48,6 @@ class ProductCategoryController {
       }
       throw new \Exception("Token mismatch");
     }
-    
     return null;
   }
 }
