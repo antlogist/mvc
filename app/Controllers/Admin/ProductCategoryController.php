@@ -35,15 +35,19 @@ class ProductCategoryController {
       if (CSRFToken::verifyCSRFToken($request->token)) {
         //Validation rules
         $rules = [
-          "name" => ["required" => true, "maxLength" => 5, "string" => true, "unique" => "categories"]
+          "name" => ["required" => true, "maxLength" => 25, "string" => true, "unique" => "categories"]
         ];
         //Cat name validation process
         $validate = new ValidateRequest;
         $validate->abide($_POST, $rules);
         //If has errors
         if ($validate->hasError()) {
-          var_dump($validate->getErrorMessages());
-          exit();
+          $errors = $validate->getErrorMessages();
+          return view("admin/products/categories", [
+            "categories" => $this->categories,
+            "links" => $this->links,
+            "errors" => $errors
+          ]);
         }
         //Process form data
         Category::create([
@@ -54,7 +58,11 @@ class ProductCategoryController {
         $categories = Category::all();
         $message = "Category created";
         //Return view from helper
-        return view("admin/products/categories", compact("categories", "message"));
+        return view("admin/products/categories", [
+          "categories" => $this->categories,
+          "links" => $this->links,
+          "success" => $message
+        ]);
       }
       throw new \Exception("Token mismatch");
     }

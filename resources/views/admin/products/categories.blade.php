@@ -5,7 +5,7 @@
 @section("content")
 <div class="dashboard expanded grid-container">
   <h2>Product Categories</h2>
-  <p>{{ isset($message) ? $message : '' }}</p>
+  @include("includes.message")
   <div class="grid-x grid-margin-x expanded">
     <div class="small-12 medium-6 cell">
       <form action="" method="post">
