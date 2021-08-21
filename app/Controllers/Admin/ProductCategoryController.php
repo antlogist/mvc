@@ -8,14 +8,24 @@ use App\Classes\ValidateRequest;
 
 class ProductCategoryController {
   public $table_name = "categories";
-  function show() {
+  public $categories;
+  public $links;
+  
+  function __construct() {
+    //Count category
     $total = Category::all()->count();
+    //Create new instance
     $object = new Category;
-    
-    //Assign variables as if they were an array
-    list($categories, $links) = paginate(3, $total, $this->table_name, $object);
-    
-    return view("admin/products/categories", compact("categories", "links"));
+    //Assign variables to the result of paginate function from helper
+    list($this->categories, $this->links) = paginate(3, $total, $this->table_name, $object);
+  }
+  
+  function show() {
+    //Return view and create array of vars and data
+    return view("admin/products/categories", [
+      "categories" => $this->categories,
+      "links" => $this->links,
+    ]);
   }
 
   function store() {
