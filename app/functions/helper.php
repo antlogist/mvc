@@ -45,7 +45,6 @@ function slug($value) {
 }
 
 function paginate($num_of_records, $total_records, $table_name, $object) {
-//  $categories = [];
   $pages = new Paginator($num_of_records, "p");
   $pages->set_total($total_records);
   $data = Capsule::select("SELECT * FROM $table_name ORDER BY created_at DESC " . $pages->get_limit());

@@ -72,4 +72,37 @@ class ProductCategoryController {
     }
     return null;
   }
+
+  function edit($id) {
+    if (Request::has("post")) {
+      $request = Request::get("post");
+      //Token validation
+      if (CSRFToken::verifyCSRFToken($request->token)) {
+        //Validation rules
+        $rules = [
+          "name" => ["required" => true, "maxLength" => 25, "string" => true, "unique" => "categories"]
+        ];
+        //Cat name validation process
+        $validate = new ValidateRequest;
+        $validate->abide($_POST, $rules);
+        //If has errors
+        if ($validate->hasError()) {
+          $errors = $validate->getErrorMessages();
+          header("HTTP/1.1 422 Unprocessible Entity", true, 422);
+          echo json_encode($errors);
+          exit;
+        }
+        //Process form data
+        Category::where("id", $id)->update([
+          "name" => $request->name,
+        ]);
+        echo json_encode([
+          "success" => "Record updated successfully"
+        ]);
+        exit;
+      }
+      throw new \Exception("Token mismatch");
+    }
+    return null;
+  }
 }
