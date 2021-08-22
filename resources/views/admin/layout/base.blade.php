@@ -9,7 +9,7 @@
 	<script src="https://use.fontawesome.com/bd91b9f588.js"></script>
 </head>
 
-<body>
+<body data-page-id="@yield('data-page-id')">
 	
 	@include("includes/admin-sidebar")
 
