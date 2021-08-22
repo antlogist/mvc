@@ -92,7 +92,7 @@ class ProductCategoryController {
           echo json_encode($errors);
           exit;
         }
-        
+        //Process form data
         Category::where("id", $id)->update([
           "name" => $request->name,
         ]);
