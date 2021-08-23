@@ -78,5 +78,5 @@
     </div>
   </div>
 </div>
-  @include("includes.delete-modal");
+  @include("includes.delete-modal")
 @endsection
