@@ -33,7 +33,7 @@
   <div class="grid-x grid-margin-x expanded">
     <div class="small-12 medium-12 cell">
       @if(count($categories))
-      <table class="hover">
+      <table class="hover" data-form="deleteForm">
         <tbody>
           @foreach($categories as $category)
           <tr>
