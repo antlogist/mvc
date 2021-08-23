@@ -44,7 +44,7 @@
               <a href="#" data-open="item-{{ $category['id'] }}"><i class="fa fa-edit"></i></a>
               <a href="#"><i class="fa fa-times"></i></a>
               <!--Edit Category Modal-->
-              <div class="reveal" id="item-{{ $category['id'] }}" data-reveal data-close-on-click="false">
+              <div class="reveal" id="item-{{ $category['id'] }}" data-reveal data-close-on-click="false" data-animation-in="scale-in-up" data-animation-out="scale-out-down">
                <div class="notification callout primary"></div>
                 <h2>Edit category</h2>
                 <form>
