@@ -45,13 +45,13 @@
               <a href="#"><i class="fa fa-times"></i></a>
               <!--Edit Category Modal-->
               <div class="reveal" id="item-{{ $category['id'] }}" data-reveal data-close-on-click="false">
+               <div class="notification"></div>
                 <h2>Edit category</h2>
                 <form>
                   <div class="input-group">
-                    <input type="text" name="name" value="{{ $category['name'] }}">
-                    <input type="hidden" name="token" value="{{ \App\Classes\CSRFToken::_token() }}">
+                    <input id="item-name-{{ $category['id'] }}" type="text" name="name" value="{{ $category['name'] }}">
                     <div>
-                      <input type="submit" class="button update-category" id="{{ $category['id'] }}" value="Update">
+                      <input type="submit" class="button update-category" id="{{ $category['id'] }}" data-token="{{ \App\Classes\CSRFToken::_token() }}" value="Update">
                     </div>
                   </div>
                 </form>
