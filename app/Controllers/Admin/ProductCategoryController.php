@@ -32,7 +32,7 @@ class ProductCategoryController {
     if (Request::has("post")) {
       $request = Request::get("post");
       //Token validation
-      if (CSRFToken::verifyCSRFToken($request->token)) {
+      if (CSRFToken::verifyCSRFToken($request->token, false)) {
         //Validation rules
         $rules = [
           "name" => ["required" => true, "maxLength" => 25, "string" => true, "unique" => "categories"]
@@ -77,7 +77,7 @@ class ProductCategoryController {
     if (Request::has("post")) {
       $request = Request::get("post");
       //Token validation
-      if (CSRFToken::verifyCSRFToken($request->token)) {
+      if (CSRFToken::verifyCSRFToken($request->token, false)) {
         //Validation rules
         $rules = [
           "name" => ["required" => true, "maxLength" => 25, "string" => true, "unique" => "categories"]

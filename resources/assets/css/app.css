@@ -6476,6 +6476,11 @@ html.is-reveal-open body {
   color: black;
 }
 
+.notification {
+  display: none;
+  margin-top: 2rem;
+}
+
 .slide-in-down.mui-enter {
   transition-duration: 500ms;
   transition-timing-function: linear;

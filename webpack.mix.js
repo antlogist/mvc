@@ -19,3 +19,5 @@ mix.scripts([
 	"resources/assets/js/admin/*.js",
 	"resources/assets/js/init.js"
 ], "public/js/all.js");
+
+
