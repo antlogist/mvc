@@ -105,4 +105,19 @@ class ProductCategoryController {
     }
     return null;
   }
+  
+  function delete($id) {
+    if (Request::has("post")) {
+      $request = Request::get("post");
+      //Token validation
+      if (CSRFToken::verifyCSRFToken($request->token)) {
+        //Process form data
+        Category::destroy($id);
+        Session::add("success", "Category Deleted");
+        Redirect::to("admin/products/categories");
+      }
+        throw new \Exception("Token mismatch");
+      }
+    return null;
+  }
 }
