@@ -34,7 +34,7 @@
         },
           success: function (data) {
             const response = jQuery.parseJSON(data);
-            $(".notification").css("display", "block").delay(4000).slideUp(300).html(response.success);
+            $(".notification").css("display", "block").removeClass("primary", "alert").addClass("success").delay(4000).slideUp(300).html(response.success);
           },
           error: function (request, error) {
             const errors = jQuery.parseJSON(request.responseText);
@@ -44,7 +44,7 @@
               li.appendChild(document.createTextNode(value));
               ul.appendChild(li);
             })
-            $(".notification").css("display", "block").delay(6000).slideUp(300).html(ul);
+            $(".notification").css("display", "block").removeClass("primary", "success").addClass("alert").delay(6000).slideUp(300).html(ul);
           }
       });
     })
