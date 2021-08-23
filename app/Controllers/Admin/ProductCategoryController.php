@@ -112,14 +112,15 @@ class ProductCategoryController {
     if (Request::has("post")) {
       $request = Request::get("post");
       //Token validation
-//      if (CSRFToken::verifyCSRFToken($request->token, false)) {
+      if (CSRFToken::verifyCSRFToken($request->token, false)) {
         //Process form data
         Category::destroy($id);
         Session::add("success", "Category Deleted");
         Redirect::to("admin/products/categories");
         Redirect::to($_SERVER["APP_URL"] . "/admin/product/categories");
-//      }
-//        throw new \Exception("Token mismatch");
+        exit;
+      } 
+        throw new \Exception("Token mismatch");
       }
     return null;
   }
