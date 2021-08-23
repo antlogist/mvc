@@ -6478,6 +6478,7 @@ html.is-reveal-open body {
 
 .notification {
   display: none;
+  margin-top: 2rem;
 }
 
 .slide-in-down.mui-enter {
