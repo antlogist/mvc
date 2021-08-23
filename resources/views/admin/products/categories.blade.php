@@ -41,8 +41,15 @@
             <td>{{ $category["slug"] }}</td>
             <td>{{ $category["added"] }}</td>
             <td width="100" class="text-right">
-              <a href="#" data-open="item-{{ $category['id'] }}"><i class="fa fa-edit"></i></a>
-              <a href="#"><i class="fa fa-times"></i></a>
+             <span>
+               <a href="#" data-open="item-{{ $category['id'] }}"><i class="fa fa-edit"></i></a>
+             </span>
+             <span>
+                <form method="POST" action="<?php echo $_SERVER["APP_URL"] ?>/admin/product/categories/{{ $cateory['id'] }}/delete" class="delete-item">
+                  <input type="hidden" name="token" value="{{ \App\Classes\CSRFToken::_token() }}">
+                  <button type="submit"><i class="fa fa-times"></i></button>
+                </form>
+             </span>
               <!--Edit Category Modal-->
               <div class="reveal" id="item-{{ $category['id'] }}" data-reveal data-close-on-click="false" data-animation-in="scale-in-up" data-animation-out="scale-out-down">
                <div class="notification callout primary"></div>
@@ -71,4 +78,5 @@
     </div>
   </div>
 </div>
+  @include("includes.delete-modal");
 @endsection
