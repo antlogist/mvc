@@ -44,8 +44,8 @@
              <span>
                <a href="#" data-open="item-{{ $category['id'] }}"><i class="fa fa-edit"></i></a>
              </span>
-             <span>
-                <form method="POST" action="<?php echo $_SERVER["APP_URL"] ?>/admin/product/categories/{{ $cateory['id'] }}/delete" class="delete-item">
+             <span  style="display: inline-block">
+                <form method="POST" action="<?php echo $_SERVER["APP_URL"] ?>/admin/product/categories/{{ $category['id'] }}/delete" class="delete-item">
                   <input type="hidden" name="token" value="{{ \App\Classes\CSRFToken::_token() }}">
                   <button type="submit"><i class="fa fa-times"></i></button>
                 </form>
