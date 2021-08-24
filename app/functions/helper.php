@@ -47,7 +47,7 @@ function slug($value) {
 function paginate($num_of_records, $total_records, $table_name, $object) {
   $pages = new Paginator($num_of_records, "p");
   $pages->set_total($total_records);
-  $data = Capsule::select("SELECT * FROM $table_name ORDER BY created_at DESC " . $pages->get_limit());
+  $data = Capsule::select("SELECT * FROM $table_name WHERE deleted_at is null ORDER BY created_at DESC " . $pages->get_limit());
   $categories = $object->transform($data);
   return [$categories, $pages->page_links()];
 }
