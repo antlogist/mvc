@@ -14,3 +14,8 @@ $router->map("POST", "/mvc/admin/product/categories/[i:id]/edit",
              "App\Controllers\Admin\ProductCategoryController@edit", "edit_product_category");
 $router->map("POST", "/mvc/admin/product/categories/[i:id]/delete", 
              "App\Controllers\Admin\ProductCategoryController@delete", "delete_product_category");
+
+//Subcategories
+$router->map("POST", "/mvc/admin/product/subcategory/crate", 
+             "App\Controllers\Admin\SubCategoryController@store", "create_subcategory");
+
