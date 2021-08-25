@@ -41,9 +41,11 @@
             <td>{{ $category["slug"] }}</td>
             <td>{{ $category["added"] }}</td>
             <td width="100" class="text-right">
+            <!--Edit button-->
              <span>
                <a href="#" data-open="item-{{ $category['id'] }}"><i class="fa fa-edit"></i></a>
              </span>
+             <!--Delete button-->
              <span  style="display: inline-block">
                 <form method="POST" action="<?php echo $_SERVER["APP_URL"] ?>/admin/product/categories/{{ $category['id'] }}/delete" class="delete-item">
                   <input type="hidden" name="token" value="{{ \App\Classes\CSRFToken::_token() }}">
