@@ -27,12 +27,14 @@ class SubCategoryController extends BaseController {
         $validate = new ValidateRequest;
         $validate->abide($_POST, $rules);
         
+        //Subcats duplicateion validation
         $duplicate_subcategory = SubCategory::where("name", $request->name)
           ->where("category_id", $request->$category_id)->exists();
         if ($duplicate_subcategory) {
           $extra_errors["name"] = array("Subcategory already exists");
         }
         
+        //If cat does not exist
         $category = Category:where("category_id", $request->$category_id)->exists();
         if (!$category) {
           $extra_errors["name"] = array("Invalid product category");
@@ -50,21 +52,10 @@ class SubCategoryController extends BaseController {
         //Process form data
         SubCategory::create([
           "name" => $request->name,
+          "category_id" => $request->category_id,
           "slug" => slug($request->name),
         ]);
-        //Get all categories
-        $categories = Category::all();
-        $message = "Category created";
-        //Count category
-        $total = Category::all()->count();
-        //Assign variables to the result of paginate function from helper
-        list($this->categories, $this->links) = paginate(3, $total, $this->table_name, new Category);
-        //Return view from helper
-        return view("admin/products/categories", [
-          "categories" => $this->categories,
-          "links" => $this->links,
-          "success" => $message
-        ]);
+        echo json_encode(["success" => "Subcategory created successfully"]);
       }
       throw new \Exception("Token mismatch");
     }
