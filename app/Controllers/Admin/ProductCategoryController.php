@@ -1,6 +1,7 @@
 <?php
 namespace App\Controllers\Admin;
 
+use App\Controllers\BaseController;
 use App\Models\Category;
 use App\Classes\Session;
 use App\Classes\Redirect;
@@ -8,7 +9,7 @@ use App\Classes\Request;
 use App\Classes\CSRFToken;
 use App\Classes\ValidateRequest;
 
-class ProductCategoryController {
+class ProductCategoryController extends BaseController {
   public $table_name = "categories";
   public $categories;
   public $links;
