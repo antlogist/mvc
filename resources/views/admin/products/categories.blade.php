@@ -42,15 +42,15 @@
             <td>{{ $category["added"] }}</td>
             <td width="100" class="text-right">
             <!--Add-subcategory button-->
-             <span>
-               <a href="#" data-open="add-category-{{ $category['id'] }}"><i class="fa fa-plus"></i></a>
+             <span data-tooltip tabindex="1" title="Add Subcategory">
+               <a href="#" data-open="add-subcategory-{{ $category['id'] }}"><i class="fa fa-plus"></i></a>
              </span>
             <!--Edit button-->
-             <span>
+             <span data-tooltip tabindex="1" title="Edit Category">
                <a href="#" data-open="item-{{ $category['id'] }}"><i class="fa fa-edit"></i></a>
              </span>
              <!--Delete button-->
-             <span  style="display: inline-block">
+             <span data-tooltip tabindex="1" title="Delete Category" style="display: inline-block">
                 <form method="POST" action="<?php echo $_SERVER["APP_URL"] ?>/admin/product/categories/{{ $category['id'] }}/delete" class="delete-item">
                   <input type="hidden" name="token" value="{{ \App\Classes\CSRFToken::_token() }}">
                   <button type="submit"><i class="fa fa-times"></i></button>
