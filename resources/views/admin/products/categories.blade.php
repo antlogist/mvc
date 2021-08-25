@@ -41,6 +41,10 @@
             <td>{{ $category["slug"] }}</td>
             <td>{{ $category["added"] }}</td>
             <td width="100" class="text-right">
+            <!--Add-subcategory button-->
+             <span>
+               <a href="#" data-open="add-category-{{ $category['id'] }}"><i class="fa fa-plus"></i></a>
+             </span>
             <!--Edit button-->
              <span>
                <a href="#" data-open="item-{{ $category['id'] }}"><i class="fa fa-edit"></i></a>
