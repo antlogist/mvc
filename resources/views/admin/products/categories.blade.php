@@ -41,18 +41,24 @@
             <td>{{ $category["slug"] }}</td>
             <td>{{ $category["added"] }}</td>
             <td width="100" class="text-right">
-             <span>
-               <a href="#" data-open="item-{{ $category['id'] }}"><i class="fa fa-edit"></i></a>
-             </span>
-             <span  style="display: inline-block">
+              <!--Add-subcategory button-->
+              <span data-tooltip tabindex="1" title="Add Subcategory">
+                <a href="#" data-open="add-subcategory-{{ $category['id'] }}"><i class="fa fa-plus"></i></a>
+              </span>
+              <!--Edit button-->
+              <span data-tooltip tabindex="1" title="Edit Category">
+                <a href="#" data-open="item-{{ $category['id'] }}"><i class="fa fa-edit"></i></a>
+              </span>
+              <!--Delete button-->
+              <span data-tooltip tabindex="1" title="Delete Category" style="display: inline-block">
                 <form method="POST" action="<?php echo $_SERVER["APP_URL"] ?>/admin/product/categories/{{ $category['id'] }}/delete" class="delete-item">
                   <input type="hidden" name="token" value="{{ \App\Classes\CSRFToken::_token() }}">
                   <button type="submit"><i class="fa fa-times"></i></button>
                 </form>
-             </span>
+              </span>
               <!--Edit Category Modal-->
               <div class="reveal" id="item-{{ $category['id'] }}" data-reveal data-close-on-click="false" data-animation-in="scale-in-up" data-animation-out="scale-out-down">
-               <div class="notification callout primary"></div>
+                <div class="notification callout primary"></div>
                 <h2>Edit category</h2>
                 <form>
                   <div class="input-group">
@@ -66,6 +72,24 @@
                   <span aria-hidden="true">&times;</span>
                 </a>
               </div>
+              <!--/Edit Category Modal-->
+              <!--Edit Subcategory Modal-->
+              <div class="reveal" id="add-subcategory-{{ $category['id'] }}" data-reveal data-close-on-click="false" data-animation-in="scale-in-up" data-animation-out="scale-out-down">
+                <div class="notification callout primary"></div>
+                <h2>Edit Subcategory</h2>
+                <form>
+                  <div class="input-group">
+                    <input id="subcategory-name-{{ $category['id'] }}" type="text">
+                    <div>
+                      <input type="submit" class="button add-subcategory" id="{{ $category['id'] }}" data-token="{{ \App\Classes\CSRFToken::_token() }}" value="Create">
+                    </div>
+                  </div>
+                </form>
+                <a href="<?php echo $_SERVER["APP_URL"] ?>/admin/product/categories" class="close-button" data-close aria-label="Close modal" type="button">
+                  <span aria-hidden="true">&times;</span>
+                </a>
+              </div>
+              <!--/Edit Subcategory Modal-->
             </td>
           </tr>
           @endforeach
@@ -78,5 +102,5 @@
     </div>
   </div>
 </div>
-  @include("includes.delete-modal")
+@include("includes.delete-modal")
 @endsection
