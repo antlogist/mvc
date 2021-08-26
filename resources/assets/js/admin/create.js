@@ -11,7 +11,7 @@
 
       $.ajax({
         type: "POST",
-        url: `/mvc/admin/product/subcategory/create`,
+        url: "/mvc/admin/product/subcategory/create",
         data: {
           token: token,
           name: name,
