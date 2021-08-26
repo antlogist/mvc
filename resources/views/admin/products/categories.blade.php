@@ -73,10 +73,10 @@
                 </a>
               </div>
               <!--/Edit Category Modal-->
-              <!--Edit Subcategory Modal-->
+              <!--Add Subcategory Modal-->
               <div class="reveal" id="add-subcategory-{{ $category['id'] }}" data-reveal data-close-on-click="false" data-animation-in="scale-in-up" data-animation-out="scale-out-down">
                 <div class="notification callout primary"></div>
-                <h2>Edit Subcategory</h2>
+                <h2>Add Subcategory</h2>
                 <form>
                   <div class="input-group">
                     <input id="subcategory-name-{{ $category['id'] }}" type="text">
@@ -89,7 +89,7 @@
                   <span aria-hidden="true">&times;</span>
                 </a>
               </div>
-              <!--/Edit Subcategory Modal-->
+              <!--/Add Subcategory Modal-->
             </td>
           </tr>
           @endforeach
