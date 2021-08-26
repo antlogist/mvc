@@ -60,6 +60,7 @@
               <div class="reveal" id="item-{{ $category['id'] }}" data-reveal data-close-on-click="false" data-animation-in="scale-in-up" data-animation-out="scale-out-down">
                 <div class="notification callout primary"></div>
                 <h2>Edit category</h2>
+                <!--Form-->
                 <form>
                   <div class="input-group">
                     <input id="item-name-{{ $category['id'] }}" type="text" name="name" value="{{ $category['name'] }}">
@@ -68,6 +69,7 @@
                     </div>
                   </div>
                 </form>
+                <!--/Form-->
                 <a href="<?php echo $_SERVER["APP_URL"] ?>/admin/product/categories" class="close-button" data-close aria-label="Close modal" type="button">
                   <span aria-hidden="true">&times;</span>
                 </a>
@@ -77,6 +79,7 @@
               <div class="reveal" id="add-subcategory-{{ $category['id'] }}" data-reveal data-close-on-click="false" data-animation-in="scale-in-up" data-animation-out="scale-out-down">
                 <div class="notification callout primary"></div>
                 <h2>Add Subcategory</h2>
+                <!--Form-->
                 <form>
                   <div class="input-group">
                     <input id="subcategory-name-{{ $category['id'] }}" type="text">
@@ -85,6 +88,7 @@
                     </div>
                   </div>
                 </form>
+                <!--/Form-->
                 <a href="<?php echo $_SERVER["APP_URL"] ?>/admin/product/categories" class="close-button" data-close aria-label="Close modal" type="button">
                   <span aria-hidden="true">&times;</span>
                 </a>
