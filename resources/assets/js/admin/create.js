@@ -7,7 +7,7 @@
       e.preventDefault();
       const token = $(this).data("token");
       const category_id = $(this).attr("id");
-      const name = $("#subcategory-name-" + id).val();
+      const name = $("#subcategory-name-" + category_id).val();
 
       $.ajax({
         type: "POST",
