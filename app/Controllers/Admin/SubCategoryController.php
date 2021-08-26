@@ -11,31 +11,33 @@ use App\Classes\CSRFToken;
 use App\Classes\ValidateRequest;
 
 class SubCategoryController extends BaseController {
-
+  
   function store() {
     if (Request::has("post")) {
       $request = Request::get("post");
       $extra_errors = [];
       //Token validation
-      if (CSRFToken::verifyCSRFToken($request->token, false)) {
+      if (CSRFToken::verifyCSRFToken($request->token, false)) {       
+        
         //Validation rules
         $rules = [
-          "name" => ["required" => true, "maxLength" => 25, "string" => true],
+          "name" => ["required" => true, "maxLength" => 25, "mixed" => true],
           "category_id" => ["required" => true]
         ];
         //Cat name validation process
         $validate = new ValidateRequest;
         $validate->abide($_POST, $rules);
-        
+
         //Subcats duplicateion validation
         $duplicate_subcategory = SubCategory::where("name", $request->name)
-          ->where("category_id", $request->$category_id)->exists();
+                    ->where("category_id", $request->category_id)->exists();
+        
         if ($duplicate_subcategory) {
           $extra_errors["name"] = array("Subcategory already exists");
         }
         
         //If cat does not exist
-        $category = Category:where("category_id", $request->$category_id)->exists();
+        $category = Category::where("id", $request->category_id)->exists();
         if (!$category) {
           $extra_errors["name"] = array("Invalid product category");
         }
@@ -49,6 +51,7 @@ class SubCategoryController extends BaseController {
           echo json_encode($response);
           exit;
         }
+        
         //Process form data
         SubCategory::create([
           "name" => $request->name,
@@ -56,59 +59,10 @@ class SubCategoryController extends BaseController {
           "slug" => slug($request->name),
         ]);
         echo json_encode(["success" => "Subcategory created successfully"]);
-      }
-      throw new \Exception("Token mismatch");
-    }
-    return null;
-  }
-
-  function edit($id) {
-    if (Request::has("post")) {
-      $request = Request::get("post");
-      //Token validation
-      if (CSRFToken::verifyCSRFToken($request->token, false)) {
-        //Validation rules
-        $rules = [
-          "name" => ["required" => true, "maxLength" => 25, "string" => true, "unique" => "categories"]
-        ];
-        //Cat name validation process
-        $validate = new ValidateRequest;
-        $validate->abide($_POST, $rules);
-        //If has errors
-        if ($validate->hasError()) {
-          $errors = $validate->getErrorMessages();
-          header("HTTP/1.1 422 Unprocessible Entity", true, 422);
-          echo json_encode($errors);
-          exit;
-        }
-        //Process form data
-        Category::where("id", $id)->update([
-          "name" => $request->name,
-        ]);
-        echo json_encode([
-          "success" => "Record updated successfully"
-        ]);
         exit;
       }
       throw new \Exception("Token mismatch");
     }
-    return null;
-  }
-  
-  function delete($id) {
-    if (Request::has("post")) {
-      $request = Request::get("post");
-      //Token validation
-      if (CSRFToken::verifyCSRFToken($request->token, false)) {
-        //Process form data
-        Category::destroy($id);
-        Session::add("success", "Category Deleted");
-        Redirect::to("admin/products/categories");
-        Redirect::to($_SERVER["APP_URL"] . "/admin/product/categories");
-        exit;
-      } 
-        throw new \Exception("Token mismatch");
-      }
     return null;
   }
 }
