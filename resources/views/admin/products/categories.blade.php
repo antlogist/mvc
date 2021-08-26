@@ -40,6 +40,7 @@
   </div>
 
   <div class="grid-x grid-margin-x expanded">
+   
     <div class="small-12 medium-12 cell">
       @if(count($categories))
       <!--Table-->
@@ -129,6 +130,7 @@
       <h3>You haven't any category.</h3>
       @endif
     </div>
+    
   </div>
 </div>
 @include("includes.delete-modal")
