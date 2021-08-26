@@ -28,7 +28,7 @@
 
       $.ajax({
         type: "POST",
-        url: `/mvc/admin/product/subcategory/create`,
+        url: "/mvc/admin/product/subcategory/create",
         data: {
           token: token,
           name: name,
@@ -36,6 +36,10 @@
         },
         success: function (data) {
           const response = jQuery.parseJSON(data);
+          
+          console.log(response);
+          return null;
+          
           $(".notification").css("display", "block").removeClass("primary", "alert").addClass("success").delay(4000).slideUp(300).html(response.success);
         },
         error: function (request, error) {
