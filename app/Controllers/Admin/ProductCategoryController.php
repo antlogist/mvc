@@ -132,7 +132,6 @@ class ProductCategoryController extends BaseController {
         //Process form data
         Category::destroy($id);
         Session::add("success", "Category Deleted");
-        Redirect::to("admin/products/categories");
         Redirect::to($_SERVER["APP_URL"] . "/admin/product/categories");
         exit;
       } 
