@@ -1,7 +1,7 @@
 (function () {
   "use strict";
 
-  ACMESTORE.admin.update = function () {
+  MVCSTORE.admin.update = function () {
     // update product category
     $(".update-category").on("click", function (e) {
       e.preventDefault();

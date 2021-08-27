@@ -9,7 +9,7 @@
 (function() {
   "use strict";
   
-  window.ACMESTORE = {
+  window.MVCSTORE = {
     global: {},
     admin: {}
   }
@@ -18,7 +18,7 @@
 (function () {
   "use strict";
 
-  ACMESTORE.admin.create = function () {
+  MVCSTORE.admin.create = function () {
     // update product category
     $(".add-subcategory").on("click", function (e) {
       e.preventDefault();
@@ -36,10 +36,6 @@
         },
         success: function (data) {
           const response = jQuery.parseJSON(data);
-          
-          console.log(response);
-          return null;
-          
           $(".notification").css("display", "block").removeClass("primary", "alert").addClass("success").delay(4000).slideUp(300).html(response.success);
         },
         error: function (request, error) {
@@ -61,7 +57,7 @@
 (function () {
   "use strict";
 
-  ACMESTORE.admin.delete = function () {
+  MVCSTORE.admin.delete = function () {
     $("table[data-form='deleteForm']").on("click", ".delete-item", function (e) {
       e.preventDefault();
       const form = $(this);
@@ -76,7 +72,7 @@
 (function () {
   "use strict";
 
-  ACMESTORE.admin.update = function () {
+  MVCSTORE.admin.update = function () {
     // update product category
     $(".update-category").on("click", function (e) {
       e.preventDefault();
@@ -122,9 +118,9 @@
       case "home":
         break;
       case "adminCategories":
-        ACMESTORE.admin.update();
-        ACMESTORE.admin.delete();
-        ACMESTORE.admin.create();
+        MVCSTORE.admin.update();
+        MVCSTORE.admin.delete();
+        MVCSTORE.admin.create();
         break;
       default:
         //do nothing

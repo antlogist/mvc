@@ -1,7 +1,7 @@
 (function() {
   "use strict";
   
-  window.ACMESTORE = {
+  window.MVCSTORE = {
     global: {},
     admin: {}
   }

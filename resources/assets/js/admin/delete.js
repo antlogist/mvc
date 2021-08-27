@@ -1,7 +1,7 @@
 (function () {
   "use strict";
 
-  ACMESTORE.admin.delete = function () {
+  MVCSTORE.admin.delete = function () {
     $("table[data-form='deleteForm']").on("click", ".delete-item", function (e) {
       e.preventDefault();
       const form = $(this);
