@@ -3,6 +3,7 @@ namespace App\Controllers\Admin;
 
 use App\Controllers\BaseController;
 use App\Models\Category;
+use App\Models\SubCategory;
 use App\Classes\Session;
 use App\Classes\Redirect;
 use App\Classes\Request;
@@ -12,15 +13,20 @@ use App\Classes\ValidateRequest;
 class ProductCategoryController extends BaseController {
   public $table_name = "categories";
   public $categories;
+  public $subcategories;
   public $links;
+  public $subcategories_links;
   
   function __construct() {
     //Count category
     $total = Category::all()->count();
+    //Count subcategories
+    $subTotal = SubCategory::all()->count();
     //Create new instance
     $object = new Category;
     //Assign variables to the result of paginate function from helper
     list($this->categories, $this->links) = paginate(3, $total, $this->table_name, $object);
+    list($this->subcategories, $this->subcategories_links) = paginate(3, $subTotal, "sub_categories", new SubCategory);
   }
   
   function show() {
@@ -28,6 +34,8 @@ class ProductCategoryController extends BaseController {
     return view("admin/products/categories", [
       "categories" => $this->categories,
       "links" => $this->links,
+      "subcategories" => $this->categories,
+      "subcategories_links" => $this->subcategories_links
     ]);
   }
 
@@ -49,7 +57,9 @@ class ProductCategoryController extends BaseController {
           return view("admin/products/categories", [
             "categories" => $this->categories,
             "links" => $this->links,
-            "errors" => $errors
+            "errors" => $errors,
+            "subcategories" => $this->categories,
+            "subcategories_links" => $this->subcategories_links
           ]);
         }
         //Process form data
@@ -62,13 +72,18 @@ class ProductCategoryController extends BaseController {
         $message = "Category created";
         //Count category
         $total = Category::all()->count();
+        //Count subcategories
+        $subTotal = SubCategory::all()->count();
         //Assign variables to the result of paginate function from helper
         list($this->categories, $this->links) = paginate(3, $total, $this->table_name, new Category);
+        list($this->subcategories, $this->subcategories_links) = paginate(3, $subTotal, "sub_categories", new SubCategory);
         //Return view from helper
         return view("admin/products/categories", [
           "categories" => $this->categories,
           "links" => $this->links,
-          "success" => $message
+          "success" => $message,
+          "subcategories" => $this->categories,
+          "subcategories_links" => $this->subcategories_links
         ]);
       }
       throw new \Exception("Token mismatch");
