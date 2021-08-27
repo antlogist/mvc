@@ -34,7 +34,7 @@ class ProductCategoryController extends BaseController {
     return view("admin/products/categories", [
       "categories" => $this->categories,
       "links" => $this->links,
-      "subcategories" => $this->categories,
+      "subcategories" => $this->subcategories,
       "subcategories_links" => $this->subcategories_links
     ]);
   }
