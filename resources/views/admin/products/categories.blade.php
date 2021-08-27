@@ -135,7 +135,7 @@
 </div>
  
 <div class="dashboard expanded grid-container">
-  <h3>Sub categories</h3>
+  <h3>Subcategories</h3>
   <div class="grid-x grid-margin-x expanded">
     <div class="small-12 medium-12 cell">
      
@@ -173,8 +173,25 @@
                 <h2>Edit subcategory</h2>
                 <!--Form-->
                 <form>
-                  <div class="input-group">
-                    <input id="item-subcategory-name-{{ $subcategory['id'] }}" type="text" value="{{ $subcategory['name'] }}">
+                  <div>
+                   <div>
+                      <input id="item-subcategory-name-{{ $subcategory['id'] }}" type="text" value="{{ $subcategory['name'] }}">
+                   </div>
+                   
+                    <div>
+                      <label>Change Category
+                        <select name="" id="item-category-{{ $subcategory['category_id'] }}">
+                          @foreach(App\Models\Category::all() as $category)
+                            @if ($category["id"] == $subcategory["category_id"])
+                              <option selected value="{{ $category['id'] }}">{{ $category["name"] }}</option>
+                            @else
+                              <option value="{{ $category['id'] }}">{{ $category["name"] }}</option>
+                            @endif
+                          @endforeach
+                        </select>
+                      </label>   
+                    </div>
+                    
                     <div>
                       <input type="submit" class="button update-subcategory" id="{{ $subcategory['id'] }}" data-token="{{ \App\Classes\CSRFToken::_token() }}" value="Update">
                     </div>
