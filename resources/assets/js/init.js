@@ -9,9 +9,9 @@
       case "home":
         break;
       case "adminCategories":
-        ACMESTORE.admin.update();
-        ACMESTORE.admin.delete();
-        ACMESTORE.admin.create();
+        MVCSTORE.admin.update();
+        MVCSTORE.admin.delete();
+        MVCSTORE.admin.create();
         break;
       default:
         //do nothing
