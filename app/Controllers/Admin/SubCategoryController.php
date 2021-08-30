@@ -85,7 +85,7 @@ class SubCategoryController extends BaseController {
                     ->where("category_id", $request->category_id)->exists();
         
         if ($duplicate_subcategory) {
-          $extra_errors["name"] = array("Ypu have not make any changes");
+          $extra_errors["name"] = array("You have not make any changes");
         }
         
         //If cat does not exist
