@@ -8,6 +8,8 @@
     switch ($("body").data("page-id")) {
       case "home":
         break;
+      case "adminProduct":
+        MVCSTORE.admin.changeEvent();
       case "adminCategories":
         MVCSTORE.admin.update();
         MVCSTORE.admin.delete();
