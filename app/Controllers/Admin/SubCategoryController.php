@@ -13,7 +13,9 @@ use App\Classes\ValidateRequest;
 class SubCategoryController extends BaseController {
   
   function store() {
+    //If POST req available
     if (Request::has("post")) {
+      //Get POST req sending to the server
       $request = Request::get("post");
       $extra_errors = [];
       //Token validation
@@ -67,8 +69,9 @@ class SubCategoryController extends BaseController {
   }
   
   function edit($id) {
-    
+    //If POST req available
     if (Request::has("post")) {
+      //Get POST req sending to the server
       $request = Request::get("post");
       
       $extra_errors = [];
@@ -120,13 +123,17 @@ class SubCategoryController extends BaseController {
   }
   
   function delete($id) {
+    //If POST req available
     if (Request::has("post")) {
+      //Get POST req sending to the server
       $request = Request::get("post");
       //Token validation
       if (CSRFToken::verifyCSRFToken($request->token, false)) {
         //Process form data
         SubCategory::destroy($id);
+        //Add success key to the SESSION
         Session::add("success", "Sub category Deleted");
+        //Redirect back to the categories page and update the page
         Redirect::to($_SERVER["APP_URL"] . "/admin/product/categories");
         exit;
       } 
