@@ -1,6 +1,6 @@
 @extends("admin.layout.base")
 @section("title", "Create Product")
-@section("data-page-id", "adminProducts")
+@section("data-page-id", "adminProduct")
 
 @section("content")
 
