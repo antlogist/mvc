@@ -23,7 +23,7 @@ class Request {
     
   }
   /**
-   * get specific request type
+   * get specific request type result
    * @param $key
    * @return mixed
    */
