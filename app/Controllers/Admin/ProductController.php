@@ -28,4 +28,11 @@ class ProductController extends BaseController {
     return view("admin/products/create", 
                 compact("categories")); //Array containing variables and their values
   }
+  
+  function getSubcategories($id) {
+    $subcategories = SubCategory::where("category_id", $id)->get();
+    echo json_encode($subcategories);
+    exit;
+  }
+  
 }
