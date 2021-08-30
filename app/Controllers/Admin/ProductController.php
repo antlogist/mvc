@@ -18,15 +18,8 @@ class ProductController extends BaseController {
   public $subcategories_links;
   
   function __construct() {
-    //Count category
-    $total = Category::all()->count();
-    //Count subcategories
-    $subTotal = SubCategory::all()->count();
-    //Create new instance
-    $object = new Category;
-    //Assign variables to the result of paginate function from helper
-    list($this->categories, $this->links) = paginate(3, $total, $this->table_name, $object);
-    list($this->subcategories, $this->subcategories_links) = paginate(3, $subTotal, "sub_categories", new SubCategory);
+    //Get all categories
+    $this->categories = Category::all();
   }
   
   function showCreateProductForm() {
