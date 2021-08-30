@@ -24,8 +24,8 @@ class ProductController extends BaseController {
   
   function showCreateProductForm() {
     //Return view and create array of vars and data
-    return view("admin/products/create", [
-      "categories" => $this->categories,
-    ]);
+    $categories = $this->categories;
+    return view("admin/products/create", 
+                compact("categories")); //Array containing variables and their values
   }
 }
