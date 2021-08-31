@@ -9,7 +9,7 @@
 
   @include("includes.message")
 
-  <form method="post" action="<?php echo $_SERVER["APP_URL"] ?>/admin/product/create">
+  <form method="post" action="<?php echo $_SERVER["APP_URL"] ?>/admin/product/create" enctype="multipart/form-data">
     <div class="grid-x grid-margin-x expanded">
 
       <!--Product name - text input-->
@@ -33,7 +33,7 @@
         <label>Product Category:
           <select name="category" id="product-category">
             <option value="{{ \App\Classes\Request::old('post', 'category')?:"" }}">
-              {{ \App\Classes\Request::old('post', 'category')?:"Select Category" }}
+              {{ \App\Classes\Request::old('post', 'category') ? : "Select Category" }}
             </option>
             @foreach($categories as $category)
             <option value="{{ $category['id'] }}"> {{ $category['name'] }}</option>
