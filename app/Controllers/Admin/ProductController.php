@@ -30,6 +30,11 @@ class ProductController extends BaseController {
     list($this->products, $this->links) = paginate(3, $total, $this->table_name, new Product);
   }
   
+  function show() {
+    $products = $this->products;
+    return view("admin/products/inventory", compact("products"));
+  }
+  
   function showCreateProductForm() {
     //Return view and create array of vars and data
     $categories = $this->categories;
