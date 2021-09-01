@@ -93,6 +93,22 @@
 
     </div>
   </form>
+  
+  <!--Delete button-->
+  <div class="small-12 cell">
+    <table dataForm="deleteForm">
+      <tr>
+        <td>
+          <form method="POST" action="<?php echo $_SERVER["APP_URL"] ?>/admin/product/{{ $product['id'] }}/delete" class="delete-item">
+            <input type="hidden" name="token" value="{{ \App\Classes\CSRFToken::_token() }}">
+            <button type="submit" class="button alert">Delete Product</button>
+          </form>
+        </td>
+      </tr>
+    </table>
+  </div>
+  <!--/Delete button-->
+  
 </div>
 @include("includes.delete-modal")
 @endsection
