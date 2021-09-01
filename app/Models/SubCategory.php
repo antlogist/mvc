@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Carbon\Carbon;
 use App\Models\Category;
+use App\Models\Product;
 
 class SubCategory extends Model {
   
@@ -17,6 +18,10 @@ class SubCategory extends Model {
   
   function category() {
     return $this->belongsTo(Category::class);
+  }
+  
+  function product() {
+    return $this->hasMany(Product::class);
   }
   
   function transform($data) {
