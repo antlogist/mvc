@@ -36,6 +36,12 @@ class ProductController extends BaseController {
     return view("admin/products/inventory", compact("products", "links"));
   }
   
+  function showEditProductForm($id) {
+    $categories = $this->categories;
+    $product = Product::where("id", $id)->with("category", "subCategory")->first();
+    return view("admin/product/edit", compact("product", "categories"));
+  }
+  
   function showCreateProductForm() {
     //Return view and create array of vars and data
     $categories = $this->categories;
