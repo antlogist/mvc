@@ -28,6 +28,7 @@ class Product extends Model {
         "sub_category_id" => $item->sub_category_id,
         "sub_category_name" => SubCategory::where("id", $item->sub_category_id)->first()->name,
         "image_path" => $item->image_path,
+        "quantity" => $item->quantity,
         "added" => $added->toFormattedDateString()
       ]);
     }
