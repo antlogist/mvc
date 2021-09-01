@@ -33,3 +33,8 @@ $router->map("POST", "/mvc/admin/product/create",
 
 $router->map("GET", "/mvc/admin/products", 
              "App\Controllers\Admin\ProductController@show", "show_products");
+
+$router->map("GET", "/mvc/admin/product/[i:id]/edit", 
+             "App\Controllers\Admin\ProductController@showEditProductForm", "edit_product_form");
+$router->map("POST", "/mvc/admin/product/edit", 
+             "App\Controllers\Admin\ProductController@edit", "edit_product");
