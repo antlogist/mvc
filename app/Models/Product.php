@@ -20,6 +20,10 @@ class Product extends Model {
     return $this->belongsTo(Category::class);
   }
   
+  function subCategory() {
+    return $this->belongsTo(SubCategory::class);
+  }
+  
   function transform($data) {
     $products = [];
     foreach($data as $item) {
