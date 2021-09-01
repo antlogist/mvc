@@ -14,6 +14,7 @@ use App\Classes\ValidateRequest;
 
 class ProductController extends BaseController {
   public $table_name = "products";
+  public $products;
   public $categories;
   public $subcategories;
   public $links;
@@ -22,6 +23,17 @@ class ProductController extends BaseController {
   function __construct() {
     //Get all categories
     $this->categories = Category::all();
+    
+    $total = Product::all()->count();
+      
+    //Assign variables to the result of paginate function from helper
+    list($this->products, $this->links) = paginate(3, $total, $this->table_name, new Product);
+  }
+  
+  function show() {
+    $products = $this->products;
+    $links = $this->links;
+    return view("admin/products/inventory", compact("products", "links"));
   }
   
   function showCreateProductForm() {
