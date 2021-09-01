@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Carbon\Carbon;
 use App\Models\Product;
+use App\Models\SubCategory;
 
 class Category extends Model {
   
@@ -16,7 +17,11 @@ class Category extends Model {
   protected $dates = ["deleted_at"];
   
   function products() {
-    return $this->hasMany(Product::class, "category_id", "id");
+    return $this->hasMany(Product::class);
+  }
+  
+  function subCategories() {
+    return $this->hasMany(SubCategory::class);
   }
   
   function transform($data) {
