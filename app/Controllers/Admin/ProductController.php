@@ -191,4 +191,20 @@ class ProductController extends BaseController {
     }
     return null;
   }
+  
+  function delete($id) {
+    if (Request::has("post")) {
+      $request = Request::get("post");
+      //Token validation
+      if (CSRFToken::verifyCSRFToken($request->token, false)) {
+        //Process form data
+        Product::destroy($id);
+        Session::add("success", "Product Deleted");
+        Redirect::to($_SERVER["APP_URL"] . "/admin/products");
+        exit;
+      } 
+        throw new \Exception("Token mismatch");
+      }
+    return null;
+  }
 }
