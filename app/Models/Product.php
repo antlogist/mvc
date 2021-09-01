@@ -16,6 +16,10 @@ class Product extends Model {
   protected $fillable = ["name", "price", "description", "category_id", "sub_category_id", "image_path", "quantity"];
   protected $dates = ["deleted_at"];
   
+  function category() {
+    return $this->belongsTo(Category::class);
+  }
+  
   function transform($data) {
     $products = [];
     foreach($data as $item) {
