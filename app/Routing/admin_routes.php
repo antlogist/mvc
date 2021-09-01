@@ -30,3 +30,6 @@ $router->map("GET", "/mvc/admin/product/create",
              "App\Controllers\Admin\ProductController@showCreateProductForm", "create_product_form");
 $router->map("POST", "/mvc/admin/product/create", 
              "App\Controllers\Admin\ProductController@store", "create_product");
+
+$router->map("GET", "/mvc/admin/products", 
+             "App\Controllers\Admin\ProductController@show", "show_products")
