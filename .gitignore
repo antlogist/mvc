@@ -3,6 +3,7 @@
 /package-lock.json
 /node_modules/
 /resources/assets/bower/vendor/
+/resources/assets/css/
 /mix-manifest.json
 /main.js
 /.lock
