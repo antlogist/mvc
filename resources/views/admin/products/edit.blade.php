@@ -95,7 +95,7 @@
   
   <!--Delete button-->
   <div class="small-12 cell">
-    <table dataForm="deleteForm">
+    <table data-form="deleteForm">
       <tr>
         <td>
           <form method="POST" action="<?php echo $_SERVER["APP_URL"] ?>/admin/product/{{ $product['id'] }}/delete" class="delete-item">
