@@ -188,6 +188,7 @@
         break;
       case "adminProduct":
         MVCSTORE.admin.changeEvent();
+        MVCSTORE.admin.delete();
       case "adminCategories":
         MVCSTORE.admin.update();
         MVCSTORE.admin.delete();
