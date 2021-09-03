@@ -9,4 +9,5 @@
 /.lock
 /bootstrap/cache/
 /public/images/uploads/
+/public/images/logo.jpg
 /public/css/
