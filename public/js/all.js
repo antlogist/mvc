@@ -11,7 +11,8 @@
   
   window.MVCSTORE = {
     global: {},
-    admin: {}
+    admin: {},
+    homeslider: {}
   }
 })();
 
@@ -177,6 +178,21 @@
 })();
 
 (function () {
+    "use strict";
+
+    MVCSTORE.homeslider.initCarousel = function () {
+        $(".hero-slider").slick({
+            slidesToShow: 1,
+            autoplay: true,
+            arrows: false,
+            dots: false,
+            fade: true,
+            autoplayHoverPause: true,
+            slideToScroll: 1
+        });
+    };
+})();
+(function () {
   "use strict";
 
   $(document).foundation();
@@ -185,7 +201,7 @@
     //Switch pages
     switch ($("body").data("page-id")) {
       case "home":
-        break;
+        MVCSTORE.homeslider.initCarousel();
       case "adminProduct":
         MVCSTORE.admin.changeEvent();
         MVCSTORE.admin.delete();
