@@ -5,12 +5,18 @@
 @section("data-page-id", "home")
 
 @section("content")
-<div class="grid-container">
-  <div class="grid-x grid-margin-x">
+<div class="home">
+  <div class="hero-slider">
+    <div> <img src="/mvc/public/images/sliders/test.jpg" alt="MVC Store"> </div>
+    <div> <img src="/mvc/public/images/sliders/test.jpg" alt="MVC Store"> </div>
+    <div> <img src="/mvc/public/images/sliders/test.jpg" alt="MVC Store"> </div>
+    <div class="grid-container">
+      <div class="grid-x grid-margin-x">
 
-    <h1>Homepage</h1>
-
+      </div>
+    </div>
   </div>
+
 </div>
 
 @stop

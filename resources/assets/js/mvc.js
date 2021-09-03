@@ -3,6 +3,7 @@
   
   window.MVCSTORE = {
     global: {},
-    admin: {}
+    admin: {},
+    homeslider: {}
   }
 })();

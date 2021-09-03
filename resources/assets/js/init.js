@@ -7,7 +7,7 @@
     //Switch pages
     switch ($("body").data("page-id")) {
       case "home":
-        break;
+        MVCSTORE.homeslider.initCarousel();
       case "adminProduct":
         MVCSTORE.admin.changeEvent();
         MVCSTORE.admin.delete();

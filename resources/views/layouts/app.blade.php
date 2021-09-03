@@ -4,6 +4,10 @@
 
 <!--Navigation-->
 
+@include("includes.nav")
+
+<!--/Navigation-->
+
 
 <!--Site wrapper-->
 <div class="site-wrapper">

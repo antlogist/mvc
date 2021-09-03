@@ -17,6 +17,7 @@ mix.scripts([
   bower + "/slick-carousel/slick/slick.min.js",
 	"resources/assets/js/mvc.js",
 	"resources/assets/js/admin/*.js",
+	"resources/assets/js/pages/*.js",
 	"resources/assets/js/init.js"
 ], "public/js/all.js");
 
