@@ -8,6 +8,7 @@
     switch ($("body").data("page-id")) {
       case "home":
         MVCSTORE.homeslider.initCarousel();
+        MVCSTORE.homeslider.homePageProducts();
       case "adminProduct":
         MVCSTORE.admin.changeEvent();
         MVCSTORE.admin.delete();
