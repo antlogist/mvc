@@ -31,6 +31,27 @@
         </div>
       </div>
     </div>
+    
+    <div class="grid-container">
+      <h2 class="text-center">Product Picks</h2>
+      <div class="grid-x grid-margin-x small-up-2 medium-up-4">
+        <div class="cell" v-for="product in products">
+          <a :href="'/mvc/product/' + product.id">
+            <div class="card" data-equalizer-watch>
+              <img :src="'/mvc/public/' + product.image_path" width="100%" height="200">
+              <div class="card-section">
+                <p>@{{ stringLimit(product.name, 18) }}</p>
+                <a :href="'/mvc/product/' + product.id" class="button more expanded">More</a>
+                <a :href="'/mvc/product/' + product.id" class="button cart expanded">
+                  $@{{ product.price }} - Add to cart
+                </a>
+              </div>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+    
   </section>
 </div>
 @stop
