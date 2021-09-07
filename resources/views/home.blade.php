@@ -20,7 +20,7 @@
             <div class="card" data-equalizer-watch>
               <img :src="'/mvc/public/' + feature.image_path" width="100%" height="200">
               <div class="card-section">
-                <p>@{{ feature.name }}</p>
+                <p>@{{ stringLimit(feature.name, 18) }}</p>
                 <a :href="'/mvc/product/' + feature.id" class="button more expanded">More</a>
                 <a :href="'/mvc/product/' + feature.id" class="button cart expanded">
                   $@{{ feature.price }} - Add to cart
