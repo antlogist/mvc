@@ -6,15 +6,19 @@
       el: "#root",
       data: {
         featured: [],
+        products: [],
         loading: false
       },
       methods: {
         getFeaturedProducts: function () {
           this.loading = true;
-          axios.get("/mvc/featured").then(function (response) {
-            app.featured = response.data.featured;
+          axios.all([
+            axios.get("/mvc/featured"), axios.get("/mvc/get-products")
+          ]).then(axios.spread(function (featuredResponse, productsResponse) {
+            app.featured = featuredResponse.data.featured;
+            app.products = productsResponse.data.products;
             app.loading = false;
-          })
+          }));
         },
         stringLimit: function (string, value) {
           if (string.length > value) {
