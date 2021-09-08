@@ -2,7 +2,7 @@
 namespace App\Controllers;
 
 use App\Models\Product;
-use App\Controllers\Request;
+use App\Classes\Request;
 use App\Classes\CSRFToken;
   
 class IndexController extends BaseController {
