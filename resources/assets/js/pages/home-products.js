@@ -7,6 +7,7 @@
       data: {
         featured: [],
         products: [],
+        count: 0,
         loading: false
       },
       methods: {
@@ -17,6 +18,7 @@
           ]).then(axios.spread(function (featuredResponse, productsResponse) {
             app.featured = featuredResponse.data.featured;
             app.products = productsResponse.data.products;
+            app.count = productsResponse.data.count;
             app.loading = false;
           }));
         },
