@@ -28,10 +28,31 @@
           } else {
             return string;
           }
+        },
+        loadMoreProducts: function () {
+          const token = $(".display-products").data("token");
+          this.loading = true;
+          const data = $.param({
+            next: 2,
+            token: token,
+            count: app.count
+          });
+          axios.post("/mvc/load-more", data).then(function (response) {
+            app.products = response.data.products;
+            app.count = response.data.count;
+            app.loading = false;
+          })
         }
       },
       created: function () {
         this.getFeaturedProducts();
+      },
+      mounted: function () {
+        $(window).scroll(function () {
+          if($(window).scrollTop() + $(window).height() == $(document).height()) {
+            app.loadMoreProducts();
+          }
+        })
       }
     });
   }
