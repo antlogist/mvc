@@ -11,7 +11,7 @@
     <div> <img src="/mvc/public/images/sliders/test.jpg" alt="MVC Store"> </div>
     <div> <img src="/mvc/public/images/sliders/test.jpg" alt="MVC Store"> </div>
   </div>
-  <section class="display-products" id="root">
+  <section class="display-products" data-token="{{ $token }}" id="root">
     <div class="grid-container">
       <h2 class="text-center">Featured Products</h2>
       <div class="grid-x grid-margin-x small-up-2 medium-up-4">
@@ -31,7 +31,7 @@
         </div>
       </div>
     </div>
-    
+
     <div class="grid-container">
       <h2 class="text-center">Product Picks</h2>
       <div class="grid-x grid-margin-x small-up-2 medium-up-4">
@@ -51,7 +51,10 @@
         </div>
       </div>
     </div>
-    
+
+    <div class="text-center">
+      <i v-show="loading" class="fa fa-spinner fa-spin" style="font-size: 3rem; padding: 3rem; position: fixed; top: 40%; color: black;"></i>
+    </div>
   </section>
 </div>
 @stop
