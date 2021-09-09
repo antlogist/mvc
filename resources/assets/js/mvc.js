@@ -4,6 +4,7 @@
   window.MVCSTORE = {
     global: {},
     admin: {},
-    homeslider: {}
+    homeslider: {},
+    product: {}
   }
 })();

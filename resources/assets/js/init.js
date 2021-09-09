@@ -9,6 +9,8 @@
       case "home":
         MVCSTORE.homeslider.initCarousel();
         MVCSTORE.homeslider.homePageProducts();
+      case "product":
+        MVCSTORE.product.details();
       case "adminProduct":
         MVCSTORE.admin.changeEvent();
         MVCSTORE.admin.delete();
