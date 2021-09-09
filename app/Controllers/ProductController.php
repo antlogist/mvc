@@ -5,7 +5,7 @@ use App\Models\Product;
 use App\Classes\Request;
 use App\Classes\CSRFToken;
   
-class IndexController extends BaseController {
+class ProductController extends BaseController {
 	function show($id) {
       $token = CSRFToken::_token();
       $products = Product::where("id", $id)->first();
