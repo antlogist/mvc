@@ -11,20 +11,27 @@
     <i v-show="loading" class="fa fa-spinner fa-spin" style="font-size: 3rem; padding: 3rem; position: fixed; top: 40%; color: black;"></i>
   </div>
 
-  <section class="item-container grid-container">
+  <section class="item-container grid-container" v-if="loading == false">
 
     <nav aria-label="You are here:" role="navigation">
       <ul class="breadcrumbs">
-        <li><a href="#">Product Category</a></li>
-        <li><a href="#">Product Subcategory</a></li>
-        <li>Product Name</li>
+        <li><a :href="'/mvc/product-category/' + category.slug">@{{ category.name }}</a></li>
+        <li><a :href="'/mvc/product-subcategory/' + subCategory.slug">@{{ subCategory.name }}</a></li>
+        <li>@{{ product.name }}</li>
       </ul>
     </nav>
 
-    <div class="cell small-4">
-      <div class="card">
-        <img src="/mvc/public/{{ $product->image_path }}" width="200" height="200">
-        <p>{{ $product->name }}</p>
+    <div class="grid-x">
+      <div class="cell small-12 medium-5 large-4">
+        <img :src="'/mvc/public/' + product.image_path" width="100%" height="200">
+      </div>
+      <div class="cell small-12 medium-7 large-8">
+        <div class="product-details grid-container">
+          <h2>@{{ product.name }}</h2>
+          <p>@{{ product.description }}</p>
+          <h2>$@{{ product.price }}</h2>
+          <button class="button alert">Add to cart</button>
+        </div>
       </div>
     </div>
   </section>
