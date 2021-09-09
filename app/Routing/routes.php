@@ -7,5 +7,7 @@ $router->map("GET", "/mvc/featured", "App\Controllers\IndexController@featuredPr
 $router->map("GET", "/mvc/get-products", "App\Controllers\IndexController@getProducts", "get_product");
 $router->map("POST", "/mvc/load-more", "App\Controllers\IndexController@loadMoreProducts", "load_more_product");
 
+$router->map("GET", "/mvc/product/[i:id]", "App\Controllers\ProductController@show", "product");
+
 //Admin routs
 require_once __DIR__ . "/admin_routes.php";
