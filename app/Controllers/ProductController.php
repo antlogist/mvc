@@ -8,7 +8,7 @@ use App\Classes\CSRFToken;
 class ProductController extends BaseController {
 	function show($id) {
       $token = CSRFToken::_token();
-      $products = Product::where("id", $id)->first();
+      $product = Product::where("id", $id)->first();
       return view("product", compact("token", "product"));
     }
 }
