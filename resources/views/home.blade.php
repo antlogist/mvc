@@ -15,7 +15,7 @@
     <div class="grid-container">
       <h2 class="text-center">Featured Products</h2>
       <div class="grid-x grid-margin-x small-up-2 medium-up-4">
-        <div class="cell" v-for="feature in featured">
+        <div class="cell" v-for="feature in featured" v-cloak>
           <a :href="'/mvc/product/' + feature.id">
             <div class="card" data-equalizer-watch>
               <img :src="'/mvc/public/' + feature.image_path" width="100%" height="200">
