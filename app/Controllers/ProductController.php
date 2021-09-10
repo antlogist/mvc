@@ -23,7 +23,7 @@ class ProductController extends BaseController {
           "product" => $product,
           "category" => $product->category,
           "subCategory" => $product->subCategory,
-          "similar_products" => $similar_products
+          "similarProducts" => $similar_products
         ]);
           exit;
       }
