@@ -35,4 +35,27 @@
       </div>
     </div>
   </section>
+
+  <section class="home" v-if="loading == false && similarProducts">
+    <div class="display-products">
+      <div class="grid-container">
+        <div class="grid-x grid-margin-x small-up-2 medium-up-4">
+          <div class="cell" v-for="similar in similarProducts" v-cloak>
+            <a :href="'/mvc/product/' + similar.id">
+              <div class="card" data-equalizer-watch>
+                <img :src="'/mvc/public/' + similar.image_path" width="100%" height="200">
+                <div class="card-section">
+                  <p>@{{ stringLimit(similar.name, 18) }}</p>
+                  <a :href="'/mvc/product/' + similar.id" class="button more expanded">More</a>
+                  <a :href="'/mvc/product/' + similar.id" class="button cart expanded">
+                    $@{{ similar.price }} - Add to cart
+                  </a>
+                </div>
+              </div>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 </div>
