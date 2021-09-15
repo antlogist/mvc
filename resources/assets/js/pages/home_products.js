@@ -23,11 +23,11 @@
           }));
         },
         stringLimit: function (string, value) {
-          if (string.length > value) {
-            return string.substring(0, value) + '...';
-          } else {
-            return string;
-          }
+          return MVCSTORE.module.truncateString(string, value);
+        },
+        addToCart: function(id) {
+          const message = MVCSTORE.module.addItemToCart(id);
+          alert(message);
         },
         loadMoreProducts: function () {
           const token = $(".display-products").data("token");

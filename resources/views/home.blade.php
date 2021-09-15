@@ -22,9 +22,9 @@
               <div class="card-section">
                 <p>@{{ stringLimit(feature.name, 18) }}</p>
                 <a :href="'/mvc/product/' + feature.id" class="button more expanded">More</a>
-                <a :href="'/mvc/product/' + feature.id" class="button cart expanded">
+                <button @click.prevent="addToCart(feature.id)" class="button cart expanded">
                   $@{{ feature.price }} - Add to cart
-                </a>
+                </button>
               </div>
             </div>
           </a>
@@ -42,9 +42,9 @@
               <div class="card-section">
                 <p>@{{ stringLimit(product.name, 18) }}</p>
                 <a :href="'/mvc/product/' + product.id" class="button more expanded">More</a>
-                <a :href="'/mvc/product/' + product.id" class="button cart expanded">
+                <button @click.prevent="addToCart(product.id)" class="button cart expanded">
                   $@{{ product.price }} - Add to cart
-                </a>
+                </button>
               </div>
             </div>
           </a>
