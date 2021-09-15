@@ -30,7 +30,7 @@
           <h2>@{{ product.name }}</h2>
           <p>@{{ product.description }}</p>
           <h2>$@{{ product.price }}</h2>
-          <button class="button alert">Add to cart</button>
+          <button @click="addToCart(product.id)" class="button alert">Add to cart</button>
         </div>
       </div>
     </div>
@@ -47,7 +47,7 @@
                 <div class="card-section">
                   <p>@{{ stringLimit(similar.name, 18) }}</p>
                   <a :href="'/mvc/product/' + similar.id" class="button more expanded">More</a>
-                  <a :href="'/mvc/product/' + similar.id" class="button cart expanded">
+                  <a @click="addToCart(similar.id)" class="button cart expanded">
                     $@{{ similar.price }} - Add to cart
                   </a>
                 </div>
