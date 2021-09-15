@@ -34,7 +34,9 @@
         },
       },
       created: function () {
-        this.getProductDetails();
+        if ($("body").data("page-id") === "product") {
+          this.getProductDetails();
+        }
       }
     });
   }
