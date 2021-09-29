@@ -29,8 +29,9 @@
           return MVCSTORE.module.truncateString(string, value);
         },
         addToCart: function(id) {
-          const message = MVCSTORE.module.addItemToCart(id);
-          alert(message);
+          MVCSTORE.module.addItemToCart(id, function(message) {
+            alert(message);
+          });
         },
       },
       created: function () {

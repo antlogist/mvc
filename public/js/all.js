@@ -209,8 +209,9 @@
           return MVCSTORE.module.truncateString(string, value);
         },
         addToCart: function(id) {
-          const message = MVCSTORE.module.addItemToCart(id);
-          alert(message);
+          MVCSTORE.module.addItemToCart(id, function(message) {
+            alert(message);
+          });
         },
         loadMoreProducts: function () {
           const token = $(".display-products").data("token");
@@ -252,8 +253,18 @@
         return string;
       }
     },
-    addItemToCart: function(id) {
-      return id;
+    addItemToCart: function(id, callback) {
+      let token = $(".display-products").data("token");
+      if (token == null || !token)  {
+        token = $(".product").data("token");
+      }
+      const postData = $.param({
+        product_id: id,
+        token: token
+      });
+      axios.post("/mvc/cart", postData).then(function(response) {
+        callback(response.data.success);
+      });
     }
   }
 })();
@@ -289,8 +300,9 @@
           return MVCSTORE.module.truncateString(string, value);
         },
         addToCart: function(id) {
-          const message = MVCSTORE.module.addItemToCart(id);
-          alert(message);
+          MVCSTORE.module.addItemToCart(id, function(message) {
+            alert(message);
+          });
         },
       },
       created: function () {

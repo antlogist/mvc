@@ -9,8 +9,18 @@
         return string;
       }
     },
-    addItemToCart: function(id) {
-      return id;
+    addItemToCart: function(id, callback) {
+      let token = $(".display-products").data("token");
+      if (token == null || !token)  {
+        token = $(".product").data("token");
+      }
+      const postData = $.param({
+        product_id: id,
+        token: token
+      });
+      axios.post("/mvc/cart", postData).then(function(response) {
+        callback(response.data.success);
+      });
     }
   }
 })();
