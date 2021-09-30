@@ -19,11 +19,11 @@ class Cart {
           foreach($cart_items as $key => $value) {
             if($key == "product_id" && $value == $request->product_id) {
               //Replace cart item with a new array
-              array_splice($_SESSION["user_cart"], $index - 1, 1,
-                [
+              array_splice($_SESSION["user_cart"], $index-1, 1,
+                array([
                   "product_id" => $request->product_id, 
                   "quantity" => $cart_items["quantity"] + 1
-                ]);
+                ]));
               self::$isItemInCart = true;
             }
           }
