@@ -13,6 +13,12 @@
   </div>
   <section class="display-products" data-token="{{ $token }}" id="root">
     <div class="grid-container">
+     <?php 
+      session_destroy();
+      echo "<pre>";
+      var_dump($_SESSION); 
+      echo "</pre>";
+    ?>
       <h2 class="text-center">Featured Products</h2>
       <div class="grid-x grid-margin-x small-up-2 medium-up-4">
         <div class="cell" v-for="feature in featured" v-cloak>
@@ -31,7 +37,6 @@
         </div>
       </div>
     </div>
-
     <div class="grid-container">
       <h2 class="text-center">Product Picks</h2>
       <div class="grid-x grid-margin-x small-up-2 medium-up-4">

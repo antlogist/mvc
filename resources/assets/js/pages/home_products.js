@@ -27,7 +27,7 @@
         },
         addToCart: function(id) {
           MVCSTORE.module.addItemToCart(id, function(message) {
-            alert(message);
+            $(".notify").css("display", "block").delay(4000).slideUp(300).html(message);
           });
         },
         loadMoreProducts: function () {
