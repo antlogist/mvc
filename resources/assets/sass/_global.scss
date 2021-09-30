@@ -96,3 +96,16 @@ hr {
 .fa-times {
   color: #ff0000;
 }
+
+.notify {
+  display: none;
+  position: fixed;
+  padding: 1rem;
+  right: 1rem;
+  bottom: 1rem;
+  width: 300px;
+  border-radius: .5rem;
+  background-color: forestgreen;
+  color: #fff;
+}
+

@@ -12,6 +12,8 @@
 <!--Site wrapper-->
 <div class="site-wrapper">
   @yield("content")
+  
+  <div class="notify text-center"></div>
 </div>
 
 @yield("footer")

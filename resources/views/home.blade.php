@@ -31,7 +31,6 @@
         </div>
       </div>
     </div>
-
     <div class="grid-container">
       <h2 class="text-center">Product Picks</h2>
       <div class="grid-x grid-margin-x small-up-2 medium-up-4">
