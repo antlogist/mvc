@@ -15,8 +15,8 @@
 
     <nav aria-label="You are here:" role="navigation">
       <ul class="breadcrumbs">
-        <li><a :href="'/mvc/product-category/' + category.slug">@{{ category.name }}</a></li>
-        <li><a :href="'/mvc/product-subcategory/' + subCategory.slug">@{{ subCategory.name }}</a></li>
+        <li><a :href="'<?php echo $_SERVER["APP_URL"] ?>/product-category/' + category.slug">@{{ category.name }}</a></li>
+        <li><a :href="'<?php echo $_SERVER["APP_URL"] ?>/product-subcategory/' + subCategory.slug">@{{ subCategory.name }}</a></li>
         <li>@{{ product.name }}</li>
       </ul>
     </nav>
@@ -41,12 +41,12 @@
       <div class="grid-container">
         <div class="grid-x grid-margin-x small-up-2 medium-up-4">
           <div class="cell" v-for="similar in similarProducts" v-cloak>
-            <a :href="'/mvc/product/' + similar.id">
+            <a :href="'<?php echo $_SERVER["APP_URL"] ?>/product/' + similar.id">
               <div class="card" data-equalizer-watch>
-                <img :src="'/mvc/public/' + similar.image_path" width="100%" height="200">
+                <img :src="'<?php echo $_SERVER["APP_URL"] ?>/public/' + similar.image_path" width="100%" height="200">
                 <div class="card-section">
                   <p>@{{ stringLimit(similar.name, 18) }}</p>
-                  <a :href="'/mvc/product/' + similar.id" class="button more expanded">More</a>
+                  <a :href="'<?php echo $_SERVER["APP_URL"] ?>/product/' + similar.id" class="button more expanded">More</a>
                   <a @click="addToCart(similar.id)" class="button cart expanded">
                     $@{{ similar.price }} - Add to cart
                   </a>
