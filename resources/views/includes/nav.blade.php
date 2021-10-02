@@ -9,7 +9,7 @@
   <div id="main-menu" class="top-bar medium-horizontal expanded medium-text-center" data-dropdown-menu data-responsive-menu="drilldown medium-dropdown" data-click-open="true" data-disable-hover="true" data-close-on-click-inside="false">
 
     <div class="top-bar-title show-for-medium">
-      <a href="/" class="logo"></a>
+      <a href="<?php echo $_SERVER["APP_URL"] ?>" class="logo"></a>
     </div>
 
     <div class="top-bar-left text-left">
@@ -46,7 +46,7 @@
         <li><a href="#">Username</a> </li>
         <li><a href="#">Sign In</a> </li>
         <li><a href="#">Register</a> </li>
-        <li><a href="#">Cart</a> </li>
+        <li><a href="<?php echo $_SERVER["APP_URL"] ?>/cart">Cart</a> </li>
       </ul>
     </div>
   </div>
