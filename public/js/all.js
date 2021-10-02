@@ -181,6 +181,22 @@
   };
 })();
 
+(function() {
+  "use strict";
+
+  MVCSTORE.product.cart  = function() {
+    const app = new Vue({
+      el: "#shopping_cart",
+      data: {
+        items: [],
+        cartTotal: [],
+        loading: false,
+        fail: false,
+        message: ""
+      }
+    });
+  };
+})();
 (function () {
   "use strict";
 
@@ -341,11 +357,17 @@
       case "home":
         MVCSTORE.homeslider.initCarousel();
         MVCSTORE.homeslider.homePageProducts();
+        break;
       case "product":
         MVCSTORE.product.details();
+        break;
+      case "cart":
+        MVCSTORE.product.cart();
+        break;
       case "adminProduct":
         MVCSTORE.admin.changeEvent();
         MVCSTORE.admin.delete();
+        break;
       case "adminCategories":
         MVCSTORE.admin.update();
         MVCSTORE.admin.delete();
