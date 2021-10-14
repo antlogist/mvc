@@ -11,4 +11,59 @@
     <i v-show="loading" class="fa fa-spinner fa-spin" style="font-size: 3rem; padding: 3rem; position: fixed; top: 40%; color: black;"></i>
   </div>
 
+  <section v-if="loading === false" class="items" style="margin-top: 7rem;">
+    <div class="grid-container">
+      <div class="small-up-12">
+        <h2 v-if="fail" v-text="message"></h2>
+        <div v-else>
+          <h2>Your cart</h2>
+          <table class="hover unstriped">
+            <thead class="text-left">
+                <tr>
+                    <th>#</th><th>Product Name</th>
+                    <th>($) Unit Price</th> <th>Qty</th><th>Total</th> <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+              <tr v-for="item in items">
+                <td class="medium-text-center">
+                  <a :href="'/mvc/product/' + item.id">
+                      <img :src="'<?php echo $_SERVER["APP_URL"] ?>/public/' + item.image" height="60px" width="60px" alt="item.name">
+                  </a>
+                </td>
+
+                <td>
+                  <h5><a :href="'/mvc/product/' + item.id">@{{ item.name }}</a></h5>
+                  Status:
+                  <span v-if="item.stock > 1" style="color: #00AA00;">In Stock</span>
+                  <span v-else style="color: #ff0000;">Out of Stock</span>
+                </td>
+
+                <td>@{{ item.price }}</td>
+                <td>
+                  @{{ item.quantity }}
+                  <button v-if="item.stock > item.quantity"
+                          style="cursor: pointer; color: #00AA00;">
+                      <i class="fa fa-plus-square" aria-hidden="true"></i>
+                  </button>
+                  <button v-if="item.quantity > 1">
+                          style="cursor: pointer; color: #ff8000;">
+                      <i class="fa fa-minus-square" aria-hidden="true"></i>
+                  </button>
+                </td>
+                <td>@{{ item.total }}</td>
+                <td class="text-center">
+                  <button>
+                      <i class="fa fa-times" aria-hidden="true"></i>
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+
 </div>
+@stop
