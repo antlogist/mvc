@@ -29,8 +29,15 @@
           }, time);
         },
         updateQuantity(product_id, operator) {
-          const postData = $.param({product_id: product_id, operator: operator});
+          const postData = $.param({ product_id: product_id, operator: operator });
           axios.post("/mvc/cart/update-qty", postData).then(function(response) {
+            app.displayItems(200);
+          });
+        },
+        removeItem(index) {
+          const postData = $.param({ item_index: index });
+          axios.post("/mvc/cart/remove-item", postData).then(function(response) {
+            $(".notify").css("display", "block").delay(4000).slideUp(300).html(response.data.success);
             app.displayItems(200);
           });
         }

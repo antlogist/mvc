@@ -53,7 +53,7 @@
                 </td>
                 <td>@{{ item.total }}</td>
                 <td class="text-center">
-                  <button>
+                  <button @click="removeItem(item.index)">
                       <i class="fa fa-times" aria-hidden="true"></i>
                   </button>
                 </td>
@@ -107,6 +107,9 @@
       </div>
     </div>
   </section>
+  <pre>
+    <?php var_dump($_SESSION); ?>
+  </pre>
 
 </div>
 @stop
