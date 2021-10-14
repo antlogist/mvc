@@ -42,11 +42,11 @@
                 <td>@{{ item.price }}</td>
                 <td>
                   @{{ item.quantity }}
-                  <button v-if="item.stock > item.quantity"
+                  <button @click.prevent="updateQuantity(item.id, '+')" v-if="item.stock > item.quantity"
                           style="cursor: pointer; color: #00AA00;">
                       <i class="fa fa-plus-square" aria-hidden="true"></i>
                   </button>
-                  <button v-if="item.quantity > 1"
+                  <button @click.prevent="updateQuantity(item.id, '-')" v-if="item.quantity > 1"
                           style="cursor: pointer; color: #ff8000;">
                       <i class="fa fa-minus-square" aria-hidden="true"></i>
                   </button>

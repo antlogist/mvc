@@ -27,6 +27,9 @@
               }
             })
           }, 2000);
+        },
+        updateQuantity(product_id, operator) {
+          alert(product_id + " " + operator);
         }
       },
       created() {
