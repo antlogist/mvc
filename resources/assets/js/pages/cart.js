@@ -3,7 +3,7 @@
 
   MVCSTORE.product.cart  = function() {
     const app = new Vue({
-      el: "#shopping_cart",
+      el: "#shoppingCart",
       data: {
         items: [],
         cartTotal: [],
