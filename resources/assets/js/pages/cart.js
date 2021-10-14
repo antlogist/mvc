@@ -12,7 +12,7 @@
         message: ""
       },
       methods: {
-        displayItems() {
+        displayItems(time) {
           this.loading = true;
           setTimeout(function() {
             axios.get("/mvc/cart/items").then(function(response) {
@@ -26,14 +26,17 @@
                 app.loading = false;
               }
             })
-          }, 2000);
+          }, time);
         },
         updateQuantity(product_id, operator) {
-          alert(product_id + " " + operator);
+          const postData = $.param({product_id: product_id, operator: operator});
+          axios.post("/mvc/cart/update-qty", postData).then(function(response) {
+            app.displayItems(200);
+          });
         }
       },
       created() {
-        this.displayItems();
+        this.displayItems(2000);
       }
     });
   };
