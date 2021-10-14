@@ -46,7 +46,7 @@
                           style="cursor: pointer; color: #00AA00;">
                       <i class="fa fa-plus-square" aria-hidden="true"></i>
                   </button>
-                  <button v-if="item.quantity > 1">
+                  <button v-if="item.quantity > 1"
                           style="cursor: pointer; color: #ff8000;">
                       <i class="fa fa-minus-square" aria-hidden="true"></i>
                   </button>
@@ -60,6 +60,49 @@
               </tr>
             </tbody>
           </table>
+
+          <table>
+            <tr>
+              <td valign="top">
+                <div class="input-group">
+                  <input type="text" name="coupon" class="input-group-field" placeholder="coupon code">
+                  <div class="input-group-button">
+                      <button class="button">Apply</button>
+                  </div>
+                </div>
+              </td>
+              <td>
+                <table class="unstriped">
+                  <tr>
+                      <td><h6>Subtotal:</h6></td>
+                      <td class="text-right"><h6>$@{{ cartTotal }}</h6></td>
+                  </tr>
+                  <tr>
+                      <td><h6>Discount Amount:</h6></td>
+                      <td class="text-right"><h6>$0.00</h6></td>
+                  </tr>
+                  <tr>
+                      <td><h6>Tax:</h6></td>
+                      <td class="text-right"><h6>$0.00</h6></td>
+                  </tr>
+                  <tr>
+                      <td><h6>Total:</h6></td>
+                      <td class="text-right"><h6>$@{{ cartTotal }}</h6></td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+          </table>
+
+          <div class="text-right">
+            <a href="<?php echo $_SERVER["APP_URL"] ?>" class="button secondary">
+                Continue Shopping &nbsp; <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+            </a>
+            <button type="submit" class="button success">
+                Checkout &nbsp; <i class="fa fa-credit-card-alt" aria-hidden="true"></i>
+            </button>
+          </div>
+
         </div>
       </div>
     </div>
