@@ -195,7 +195,7 @@
         message: ""
       },
       methods: {
-        displayItems() {
+        displayItems(time) {
           this.loading = true;
           setTimeout(function() {
             axios.get("/mvc/cart/items").then(function(response) {
@@ -209,11 +209,31 @@
                 app.loading = false;
               }
             })
-          }, 2000);
+          }, time);
+        },
+        updateQuantity(product_id, operator) {
+          const postData = $.param({ product_id: product_id, operator: operator });
+          axios.post("/mvc/cart/update-qty", postData).then(function(response) {
+            app.displayItems(200);
+          });
+        },
+        removeItem(index) {
+          const postData = $.param({ item_index: index });
+          axios.post("/mvc/cart/remove-item", postData).then(function(response) {
+            $(".notify").css("display", "block").delay(4000).slideUp(300).html(response.data.success);
+            app.displayItems(200);
+          });
+        },
+        emptyCart() {
+          const postData = $.param({ empty_cart: true });
+          axios.post("/mvc/cart/empty", postData).then(function(response) {
+            $(".notify").css("display", "block").delay(4000).slideUp(300).html(response.data.success);
+            app.displayItems(200);
+          });
         }
       },
       created() {
-        this.displayItems();
+        this.displayItems(2000);
       }
     });
   };

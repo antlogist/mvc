@@ -70,4 +70,66 @@ class CartController extends BaseController {
       // echo $ex->getMessage();
     }
   }
+
+  function updateQuantity() {
+    if (Request::has("post")) {
+      $request = Request::get("post");
+        if (!$request->product_id) {
+          throw new \Exception("Malicious Activity");
+        }
+
+        $index = 0;
+        $quantity = '';
+
+        foreach($_SESSION["user_cart"] as $cart_items) {
+          $index++;
+          foreach($cart_items as $key => $value) {
+            if ($key == "product_id" && $value == $request->product_id) {
+              switch($request->operator) {
+                case "+":
+                  $quantity = $cart_items["quantity"] + 1;
+                  break;
+                case "-":
+                  $quantity = $cart_items["quantity"] - 1;
+                  if($quantity < 1){
+                    $quantity = 1;
+                  }
+                  break;
+              }
+
+              array_splice($_SESSION["user_cart"], $index-1, 1,
+                array([
+                  "product_id" => $request->product_id,
+                  "quantity" => $quantity
+                ]));
+
+            }
+          }
+        }
+
+      }
+  }
+
+  function removeItem() {
+    if (Request::has("post")) {
+      $request = Request::get("post");
+      if ($request->item_index === "") {
+        throw new \Exception("Malicious Activity");
+      }
+      Cart::removeItem($request->item_index);
+      echo json_encode(["success" => "Product removed from the cart"]);
+      exit;
+    }
+  }
+
+  function emptyCart() {
+    if (Request::has("post")) {
+      $request = Request::get("post");
+      if($request->empty_cart == true) {
+        Cart::clear();
+        echo json_encode(["success" => "Products removed from the cart"]);
+        exit;
+      }
+    }
+  }
 }
