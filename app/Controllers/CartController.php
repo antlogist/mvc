@@ -121,4 +121,15 @@ class CartController extends BaseController {
       exit;
     }
   }
+
+  function emptyCart() {
+    if (Request::has("post")) {
+      $request = Request::get("post");
+      if($request->empty_cart == true) {
+        Cart::clear();
+        echo json_encode(["success" => "Products removed from the cart"]);
+        exit;
+      }
+    }
+  }
 }

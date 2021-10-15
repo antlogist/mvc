@@ -40,6 +40,13 @@
             $(".notify").css("display", "block").delay(4000).slideUp(300).html(response.data.success);
             app.displayItems(200);
           });
+        },
+        emptyCart() {
+          const postData = $.param({ empty_cart: true });
+          axios.post("/mvc/cart/empty", postData).then(function(response) {
+            $(".notify").css("display", "block").delay(4000).slideUp(300).html(response.data.success);
+            app.displayItems(200);
+          });
         }
       },
       created() {

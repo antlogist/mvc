@@ -95,6 +95,9 @@
           </table>
 
           <div class="text-right">
+            <button class="button" @click="emptyCart()">
+              Empty Cart
+            </button>
             <a href="<?php echo $_SERVER["APP_URL"] ?>" class="button secondary">
                 Continue Shopping &nbsp; <i class="fa fa-shopping-cart" aria-hidden="true"></i>
             </a>
@@ -107,9 +110,5 @@
       </div>
     </div>
   </section>
-  <pre>
-    <?php var_dump($_SESSION); ?>
-  </pre>
-
 </div>
 @stop
