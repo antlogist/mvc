@@ -6,7 +6,7 @@
 
 @section("content")
 
-<div class="auth" id="auth" style="padding: 7rem;">
+<div class="auth grid-container" id="auth" style="margin-top: 7rem;">
 <section class="register_form">
   <div class="row">
     <div class="small-12 medium-7 medium-centered">
