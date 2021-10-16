@@ -4,7 +4,7 @@
 
 @section('content')
 <div class="auth grid-container" id="auth" style="margin-top: 7rem;">
-  <section class="login_form">
+  <section class="login_form" style="max-width: 720px; margin: 0 auto;">
     <div class="row">
       <div class="small-12 medium-7 medium-centered">
         <h2 class="text-center">Login</h2>
