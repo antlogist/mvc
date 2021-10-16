@@ -13,5 +13,8 @@ $router->map("GET", "/mvc/product-details/[i:id]", "App\Controllers\ProductContr
 //Cart routs
 require_once __DIR__ . "/cart.php";
 
+//Auth routs
+require_once __DIR__ . "/auth.php";
+
 //Admin routs
 require_once __DIR__ . "/admin_routes.php";
