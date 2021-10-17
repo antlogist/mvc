@@ -9,7 +9,7 @@
       <div class="small-12 medium-7 medium-centered">
         <h2 class="text-center">Login</h2>
         @include('includes.message')
-        <form action="/login" method="post">
+        <form action="/mvc/login" method="post">
           <input type="text" name="username" placeholder="Your Username or Email"
                   value="{{ \App\Classes\Request::old('post', 'username') }}">
 
