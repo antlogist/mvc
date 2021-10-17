@@ -4,6 +4,7 @@ use Philo\Blade\Blade;
 use voku\helper\Paginator;
 use App\Classes\Session;
 use Illuminate\Database\Capsule\Manager as Capsule;
+use App\Models\User;
 
 function view($path, array $data = []) {
 
@@ -55,4 +56,11 @@ function paginate($num_of_records, $total_records, $table_name, $object) {
 
 function isAuthenticated() {
     return Session::has("SESSION_USER_NAME") ? true : false;
+}
+
+function user() {
+  if(isAuthenticated()) {
+      return User::findOrFail(Session::get("SESSION_USER_ID"));
+  }
+  return false;
 }
