@@ -9,6 +9,12 @@ use App\Classes\ValidateRequest;
 use App\Models\User;
 
 class AuthController extends BaseController {
+  public function __construct() {
+      if(isAuthenticated()) {
+          Redirect::to("/mvc/");
+      }
+  }
+
 	function showRegisterForm() {
     return view("register");
   }
@@ -108,4 +114,18 @@ class AuthController extends BaseController {
     return null;
 
   }
+
+  function logout() {
+      if(isAuthenticated()){
+          Session::remove('SESSION_USER_ID');
+          Session::remove('SESSION_USER_NAME');
+
+          if(!Session::has('user_cart')){
+              session_destroy();
+              session_regenerate_id(true);
+          }
+      }
+      Redirect::to('/mvc/');
+  }
+
 }
