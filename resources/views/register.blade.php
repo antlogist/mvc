@@ -7,7 +7,7 @@
 @section("content")
 
 <div class="auth grid-container" id="auth" style="margin-top: 7rem;">
-<section class="register_form">
+<section class="register_form" style="max-width: 720px; margin: 0 auto;">
   <div class="row">
     <div class="small-12 medium-7 medium-centered">
         <h2 class="text-center">Create Account</h2>
