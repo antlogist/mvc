@@ -43,10 +43,15 @@
 
     <div class="top-bar-right">
       <ul class="dropdown menu vertical medium-horizontal">
-        <li><a href="#">Username</a> </li>
+        @if(isAuthenticated())
+        <li><a href="#">{{ user()->username }}</a> </li>
+        <li><a href="<?php echo $_SERVER["APP_URL"] ?>/cart">Cart</a> </li>
+        <li><a href="<?php echo $_SERVER["APP_URL"] ?>/logout">Logout</a> </li>
+        @else
         <li><a href="<?php echo $_SERVER["APP_URL"] ?>/login">Sign In</a> </li>
         <li><a href="<?php echo $_SERVER["APP_URL"] ?>/register">Register</a> </li>
         <li><a href="<?php echo $_SERVER["APP_URL"] ?>/cart">Cart</a> </li>
+        @endif
       </ul>
     </div>
   </div>
