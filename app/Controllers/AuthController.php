@@ -91,7 +91,8 @@ class AuthController extends BaseController {
           }else{
               Session::add('SESSION_USER_ID', $user->id);
               Session::add('SESSION_USER_NAME', $user->username);
-              Redirect::to('/');
+              Redirect::to('/mvc/');
+              exit;
           }
         } else {
             Session::add('error', 'User not found, please try again');
