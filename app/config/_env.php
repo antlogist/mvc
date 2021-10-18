@@ -9,3 +9,5 @@ require_once __DIR__."/../../vendor/autoload.php";
 //Composer vlucas/dotenv Object
 $dotenv = Dotenv\Dotenv::createImmutable(BASE_PATH);
 $dotenv->safeLoad();
+
+require_once __DIR__ . '/_stripe.php';
