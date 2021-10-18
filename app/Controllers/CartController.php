@@ -64,7 +64,7 @@ class CartController extends BaseController {
         $index++;
       }
       $cartTtotal = number_format($cartTtotal, 2);
-      echo json_encode(["items" => $result, "cartTotal" => $cartTtotal]);
+      echo json_encode(["items" => $result, "cartTotal" => $cartTtotal, "authenticated" => isAuthenticated()]);
       exit;
     }catch(\Exception $ex) {
       // echo $ex->getMessage();
