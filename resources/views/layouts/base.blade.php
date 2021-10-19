@@ -17,6 +17,7 @@
 
 
   <script src="<?php echo $_SERVER["APP_URL"] ?>/public/js/all.js<?php echo '?' . mt_rand(); ?>"></script>
+  @yield("stripe-checkout")
 </body>
 
 </html>
