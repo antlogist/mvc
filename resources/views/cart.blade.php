@@ -107,6 +107,11 @@
             <a v-else href="<?php echo $_SERVER["APP_URL"] ?>/login" class="button secondary">
                 Checkout &nbsp; <i class="fa fa-shopping-cart" aria-hidden="true"></i>
             </a>
+
+            <span id="properties" class="hide"
+              data-customer-email="{{ user()->email }}"
+              data-stripe-key="{{ \App\Classes\Session::get('publishable_key') }}">
+            </span>
           </div>
 
         </div>
