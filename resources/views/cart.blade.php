@@ -104,7 +104,7 @@
             <button v-if="authenticated" class="button success">
                 Checkout &nbsp; <i class="fa fa-credit-card-alt" aria-hidden="true"></i>
             </button>
-            <a v-else href="<?php echo $_SERVER["APP_URL"] ?>" class="button secondary">
+            <a v-else href="<?php echo $_SERVER["APP_URL"] ?>/login" class="button secondary">
                 Checkout &nbsp; <i class="fa fa-shopping-cart" aria-hidden="true"></i>
             </a>
           </div>
