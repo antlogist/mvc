@@ -6,3 +6,6 @@ $router->map("GET", "/mvc/cart/items", "App\Controllers\CartController@getCartIt
 $router->map("POST", "/mvc/cart/update-qty", "App\Controllers\CartController@updateQuantity", "update_cart_qty");
 $router->map("POST", "/mvc/cart/remove-item", "App\Controllers\CartController@removeItem", "remove_cart_item");
 $router->map("POST", "/mvc/cart/empty", "App\Controllers\CartController@emptyCart", "empty_cart");
+
+//Checkout
+$router->map("POST", "/mvc/cart/create-checkout-session", "App\Controllers\CartController@createCheckoutSession", "create_checkout_session");
