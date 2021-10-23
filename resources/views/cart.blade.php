@@ -4,6 +4,10 @@
 
 @section("data-page-id", "cart")
 
+@section("stripe-checkout")
+<script src="https://js.stripe.com/v3/"></script>
+@endsection
+
 @section("content")
 <div class="shopping_cart" id="shoppingCart">
 
@@ -101,12 +105,17 @@
             <a href="<?php echo $_SERVER["APP_URL"] ?>" class="button secondary">
                 Continue Shopping &nbsp; <i class="fa fa-shopping-cart" aria-hidden="true"></i>
             </a>
-            <button v-if="authenticated" class="button success">
+            <button v-if="authenticated" class="button success" @click="checkout()">
                 Checkout &nbsp; <i class="fa fa-credit-card-alt" aria-hidden="true"></i>
             </button>
             <a v-else href="<?php echo $_SERVER["APP_URL"] ?>/login" class="button secondary">
                 Checkout &nbsp; <i class="fa fa-shopping-cart" aria-hidden="true"></i>
             </a>
+
+            <span id="properties" class="hide"
+              data-customer-email="{{ user()->email }}"
+              data-stripe-key="{{ \App\Classes\Session::get('publishable_key') }}">
+            </span>
           </div>
 
         </div>

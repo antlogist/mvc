@@ -10,4 +10,3 @@ $stripe = array(
 Session::add('publishable_key', $stripe['publishable_key']);
 
 Stripe::setApiKey($stripe['secret_key']);
-

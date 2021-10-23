@@ -6,6 +6,7 @@ use App\Classes\Cart;
 use App\Classes\Request;
 use App\Classes\CSRFToken;
 use App\Models\Product;
+// use Stripe\Stripe;
 
 class CartController extends BaseController {
   function show() {
@@ -26,10 +27,10 @@ class CartController extends BaseController {
     }
   }
 
-  function getCartItems() {
+  function getCartItems($stripe = false) {
     try {
       $result = array();
-      $cartTtotal = 0;
+      $cartTotal = 0;
       if(!Session::has("user_cart") || count(Session::get("user_cart")) < 1) {
         echo json_encode([
           "fail" => "No items in the cart"
@@ -47,7 +48,7 @@ class CartController extends BaseController {
         }
 
         $totalPrice = $item->price * $quantity;
-        $cartTtotal = $totalPrice + $cartTtotal;
+        $cartTotal = $totalPrice + $cartTotal;
         $totalPrice = number_format($totalPrice, 2);
 
         array_push($result, [
@@ -63,9 +64,13 @@ class CartController extends BaseController {
         ]);
         $index++;
       }
-      $cartTtotal = number_format($cartTtotal, 2);
-      echo json_encode(["items" => $result, "cartTotal" => $cartTtotal, "authenticated" => isAuthenticated()]);
-      exit;
+      $cartTotal = number_format($cartTotal, 2);
+      if ($stripe == false) {
+        echo json_encode(["items" => $result, "cartTotal" => $cartTotal, "authenticated" => isAuthenticated(), "amountInCents" => convertMoneyToCents($cartTotal)]);
+        exit;
+      } else {
+        return $result;
+      }
     }catch(\Exception $ex) {
       // echo $ex->getMessage();
     }
@@ -131,5 +136,42 @@ class CartController extends BaseController {
         exit;
       }
     }
+  }
+
+  function createCheckoutSession() {
+
+    $items = $this->getCartItems(true);
+
+    $lineItems = array();
+
+    foreach($items as $item) {
+      array_push($lineItems, [
+        'name' => $item["name"],
+        'amount' => convertMoneyToCents($item["price"]),
+        'currency' => 'usd',
+        'quantity' => $item['quantity']
+      ]);
+    }
+    if (Request::has("post")) {
+      $request = Request::get("post");
+    }
+
+    header('Content-Type: application/json');
+
+    $checkout_session = \Stripe\Checkout\Session::create([
+      'line_items' => $lineItems,
+      'payment_method_types' => [
+        'card',
+      ],
+      'mode' => 'payment',
+      'success_url' => $_SERVER["APP_URL"] . '/success.html',
+      'cancel_url' => $_SERVER["APP_URL"] . '/cancel.html',
+    ]);
+
+    echo $checkout_session->url;
+
+    // header("HTTP/1.1 303 See Other");
+    // header("Location: " . $checkout_session->url);
+
   }
 }

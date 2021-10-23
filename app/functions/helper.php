@@ -64,3 +64,16 @@ function user() {
   }
   return false;
 }
+
+function convertMoneyToCents($value) {
+  //remove commas
+  $value = preg_replace("/\,/i","",$value);
+  $value = preg_replace("/([^0-9\.\-])/i","",$value);
+
+  if(!is_numeric($value)){
+      return 0.00;
+  }
+
+  $value = (float) $value;
+  return round($value, 2) * 100;
+}
