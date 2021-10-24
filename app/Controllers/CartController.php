@@ -140,6 +140,10 @@ class CartController extends BaseController {
 
   function createCheckoutSession() {
 
+    if (!isAuthenticated) {
+      echo json_encode(["error" => "Something went wrong"]);
+    }
+
     $items = $this->getCartItems(true);
 
     $lineItems = array();
@@ -151,9 +155,6 @@ class CartController extends BaseController {
         'currency' => 'usd',
         'quantity' => $item['quantity']
       ]);
-    }
-    if (Request::has("post")) {
-      $request = Request::get("post");
     }
 
     header('Content-Type: application/json');
