@@ -186,7 +186,7 @@
 
   MVCSTORE.product.cart  = function() {
 
-    const stripe = Stripe($('#properties').data('stripe-key'));
+    // const stripe = Stripe($('#properties').data('stripe-key'));
     // const elements = stripe.elements({
     //   locale: "auto",
 
@@ -258,7 +258,7 @@
             app.displayItems(200);
           });
         },
-        async checkout2() {
+        // async checkout2() {
           // alert("Stripe!!!")
           // stripe.open({
           //   name: "Podlesnyy, Inc.",
@@ -268,22 +268,22 @@
           //   zipCode: true
           // });
           // Call your backend to create the Checkout Session
-          const response = await fetch('/mvc/cart/create-checkout-session', { method: 'POST' });
-          const session = await response.json();
+          // const response = await fetch('/mvc/cart/create-checkout-session', { method: 'POST' });
+          // const session = await response.json();
 
           // When the customer clicks on the button, redirect them to Checkout.
-          const result = await stripe.redirectToCheckout({
-            sessionId: session.id,
-          });
+          // const result = await stripe.redirectToCheckout({
+          //   sessionId: session.id,
+          // });
 
-          if (result.error) {
-            // If `redirectToCheckout` fails due to a browser or network
-            // error, display the localized error message to your customer
-            // using `result.error.message`.
-            console.log(result.error);
-          }
+          // if (result.error) {
+          //   // If `redirectToCheckout` fails due to a browser or network
+          //   // error, display the localized error message to your customer
+          //   // using `result.error.message`.
+          //   console.log(result.error);
+          // }
 
-        },
+        // },
         checkout() {
           const postData = $.param({
 

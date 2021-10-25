@@ -3,7 +3,7 @@
 
   MVCSTORE.product.cart  = function() {
 
-    const stripe = Stripe($('#properties').data('stripe-key'));
+    // const stripe = Stripe($('#properties').data('stripe-key'));
     // const elements = stripe.elements({
     //   locale: "auto",
 
