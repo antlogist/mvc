@@ -9,5 +9,9 @@ $router->map("POST", "/mvc/cart/empty", "App\Controllers\CartController@emptyCar
 
 //Checkout
 $router->map("POST", "/mvc/cart/create-checkout-session", "App\Controllers\CartController@createCheckoutSession", "create_checkout_session");
-$router->map("POST", "/mvc/cart/stripe-webhook-events", "App\Controllers\CartController@stripeWebhookEvents", "stripe_webhook_events");
+$router->map("GET", "/mvc/cart/stripe-webhook-events", "App\Controllers\CartController@stripeWebhookEventsGet", "stripe_webhook_events_get");
+$router->map("POST", "/mvc/cart/stripe-webhook-events", "App\Controllers\CartController@stripeWebhookEventsPost", "stripe_webhook_events_post");
 $router->map("GET", "/mvc/cart/checkout", "App\Controllers\CartController@checkout", "create_checkout_form");
+
+//Stripe response
+$router->map("GET", "/mvc/cart/stripe-success", "App\Controllers\CartController@stripeSuccess", "stripe_success");
