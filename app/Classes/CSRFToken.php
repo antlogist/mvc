@@ -15,10 +15,10 @@ class CSRFToken {
       $randomToken = base64_encode(openssl_random_pseudo_bytes(32));
       Session::add("token", $randomToken);
     }
-    
+
     return Session::get("token");
   }
-  
+
   /**
    * Verify token
    * @param $requestToken
@@ -28,7 +28,7 @@ class CSRFToken {
   static function verifyCSRFToken($requestToken, $regenerate = true) {
     if (Session::has("token") && Session::get("token") === $requestToken) {
       if ($regenerate) {
-        Session::remove("token"); 
+        Session::remove("token");
       }
       return true;
     }
