@@ -6,7 +6,8 @@ use App\Classes\Cart;
 use App\Classes\Request;
 use App\Classes\CSRFToken;
 use App\Models\Product;
-// use Stripe\Stripe;
+use App\Models\Order;
+use App\Models\Payment;
 
 class CartController extends BaseController {
   function show() {
@@ -65,6 +66,8 @@ class CartController extends BaseController {
         $index++;
       }
       $cartTotal = number_format($cartTotal, 2);
+      Session::add("cartTotal", $cartTotal);
+
       if ($stripe == false) {
         echo json_encode(["items" => $result, "cartTotal" => $cartTotal, "authenticated" => isAuthenticated(), "amountInCents" => convertMoneyToCents($cartTotal)]);
         exit;
@@ -138,26 +141,50 @@ class CartController extends BaseController {
     }
   }
 
+  function checkout() {
+
+    if (!isAuthenticated) {
+      echo json_encode(["error" => "Something went wrong"]);
+      exit;
+    }
+
+    $intent = \Stripe\PaymentIntent::create([
+      'amount' => convertMoneyToCents(Session::get("cartTotal")),
+      'currency' => 'eur',
+      'payment_method_types' => ['card']
+    ]);
+
+    echo json_encode(array('client_secret' => $intent->client_secret));
+  }
+
   function createCheckoutSession() {
 
     if (!isAuthenticated) {
       echo json_encode(["error" => "Something went wrong"]);
+      exit;
     }
+
+    $result = array();
 
     $items = $this->getCartItems(true);
 
     $lineItems = array();
 
+    $order_no = strtoupper(uniqid());
+
     foreach($items as $item) {
       array_push($lineItems, [
-        'name' => $item["name"],
-        'amount' => convertMoneyToCents($item["price"]),
-        'currency' => 'usd',
-        'quantity' => $item['quantity']
+        'quantity' => $item['quantity'],
+        'price_data' => [
+          'currency' => 'usd',
+          'product_data' => [
+            'name' => $item['name'],
+          ],
+          'unit_amount' => convertMoneyToCents($item["price"]),
+        ]
+
       ]);
     }
-
-    header('Content-Type: application/json');
 
     $checkout_session = \Stripe\Checkout\Session::create([
       'line_items' => $lineItems,
@@ -165,14 +192,85 @@ class CartController extends BaseController {
         'card',
       ],
       'mode' => 'payment',
-      'success_url' => $_SERVER["APP_URL"] . '/success.html',
-      'cancel_url' => $_SERVER["APP_URL"] . '/cancel.html',
+      'success_url' => $_SERVER["APP_URL"] . '/cart/stripe-success?stripe_session={CHECKOUT_SESSION_ID}',
+      'cancel_url' => $_SERVER["APP_URL"] . '/cart/stripe-cancel?stripe_session={CHECKOUT_SESSION_ID}',
+      'payment_intent_data' => [
+        'metadata' => [
+          'order_no' => $order_no,
+          'user_id' => $_SESSION["SESSION_USER_ID"]
+        ]
+      ]
     ]);
 
+    Session::add("stripe_session", $checkout_session->id);
+
     echo $checkout_session->url;
+  }
 
-    // header("HTTP/1.1 303 See Other");
-    // header("Location: " . $checkout_session->url);
+  function stripeSuccess() {
 
+    if (Request::has("get")) {
+      $request = Request::get("get");
+      if ($request->stripe_session == Session::get("stripe_session")) {
+
+        $result = array();
+
+        $order_id = Session::get("stripe_session");
+
+        foreach($_SESSION["user_cart"] as $cart_items) {
+
+          $productId = $cart_items["product_id"];
+          $quantity = $cart_items["quantity"];
+          $item = Product::where("id", $productId)->first();
+
+          if(!$item) {
+            continue;
+          }
+
+          $totalPrice = $item->price * $quantity;
+          $totalPrice = number_format($totalPrice, 2);
+
+          //store info
+          Order::create([
+            "user_id" => user()->id,
+            "product_id" => $productId,
+            "unit_price" => $item->price,
+            "status" => "Pending",
+            "quantity" => $quantity,
+            "total" => $totalPrice,
+            "order_no" => $order_id
+          ]);
+
+          $item->quantity = $item->quantity - $quantity;
+          $item->save();
+
+          array_push($result, [
+            "name" => $item->name,
+            "price" => $item->price,
+            "total" => $totalPrice,
+            "quantity" => $quantity,
+          ]);
+        }
+
+        Payment::create([
+          'user_id' => user()->id,
+          'order_no' => $order_id,
+          'amount' => convertMoneyToCents(Session::get("cartTotal")),
+          'status' => "paid",
+        ]);
+
+        Cart::clear();
+
+        echo json_encode([
+          "success" => "Thank you, we have received your payment and now processing your order."
+        ]);
+      }
+    }
+
+    return view("stripe-success");
+  }
+
+  function stripeCancel() {
+    return view("stripe-cancel");
   }
 }
