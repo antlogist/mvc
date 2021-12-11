@@ -186,27 +186,24 @@
 
   MVCSTORE.product.cart  = function() {
 
-    // const stripe = Stripe($('#properties').data('stripe-key'));
-    // const elements = stripe.elements({
-    //   locale: "auto",
+    // (async () => {
+    //   const stripe = Stripe($('#properties').data('stripe-key'));
+    //   const response = await fetch('/mvc/cart/checkout');
+    //   const {client_secret: clientSecret} = await response.json();
+    //   // Render the Payment Element using the clientSecret
+    //   const options = {
+    //     clientSecret: clientSecret,
+    //     // Fully customizable with appearance API.
+    //     // appearance: {/*...*/},
+    //   };
 
-    // })
+    //   // Set up Stripe.js and Elements to use in checkout form, passing the client secret obtained in step 2
+    //   const elements = stripe.elements(options);
 
-    // const Stripe = StripeCheckout.configure({
-    //   key: $('#properties').data('stripe-key'),
-    //   locale: "auto",
-    //   image: "",
-    //   token: function (token) {
-    //       const data = $.param({stripeToken: token.id, stripeEmail:token.email});
-    //       axios.post('/cart/payment', data).then(function (response) {
-    //           $(".notify").css("display", 'block').delay(4000).slideUp(300)
-    //               .html(response.data.success);
-    //           app.displayItems(200);
-    //       }).catch(function (error) {
-    //           console.log(error);
-    //       })
-    //   }
-    // });
+    //   // Create and mount the Payment Element
+    //   const paymentElement = elements.create('payment');
+    //   paymentElement.mount('#payment-element');
+    // })();
 
     const app = new Vue({
       el: "#shoppingCart",
@@ -258,42 +255,56 @@
             app.displayItems(200);
           });
         },
-        // async checkout2() {
-          // alert("Stripe!!!")
-          // stripe.open({
-          //   name: "Podlesnyy, Inc.",
-          //   description: "Shopping Cart Items",
-          //   email: $('#properties').data('customer-email'),
-          //   amount: app.amountInCents,
-          //   zipCode: true
-          // });
-          // Call your backend to create the Checkout Session
-          // const response = await fetch('/mvc/cart/create-checkout-session', { method: 'POST' });
-          // const session = await response.json();
-
-          // When the customer clicks on the button, redirect them to Checkout.
-          // const result = await stripe.redirectToCheckout({
-          //   sessionId: session.id,
-          // });
-
-          // if (result.error) {
-          //   // If `redirectToCheckout` fails due to a browser or network
-          //   // error, display the localized error message to your customer
-          //   // using `result.error.message`.
-          //   console.log(result.error);
-          // }
-
-        // },
         checkout() {
-          const postData = $.param({
-
-          });
           axios.post('/mvc/cart/create-checkout-session', "").then(function (response) {
             console.log(response["data"]);
             window.location.replace(response["data"]);
           }).catch(function (error) {
               console.log(error);
           })
+          // this.renderCheckoutForm();
+        },
+        renderCheckoutForm() {
+
+          axios.get('/mvc/cart/checkout', "").then(function (response) {
+
+            const clientSecret = response["data"]["client_secret"];
+            const stripe = Stripe($('#properties').data('stripe-key'));
+
+            const options = {
+              clientSecret: clientSecret,
+              // Fully customizable with appearance API.
+              // appearance: {/*...*/},
+            };
+
+            // Set up Stripe.js and Elements to use in checkout form, passing the client secret obtained in step 2
+            const elements = stripe.elements(options);
+
+            // Create and mount the Payment Element
+            const paymentElement = elements.create('payment');
+            paymentElement.mount('#payment-element');
+
+          }).catch(function (error) {
+              console.log(error);
+          })
+
+
+          // const stripe = Stripe($('#properties').data('stripe-key'));
+          // const response = await fetch('/mvc/cart/checkout');
+          // const {client_secret: clientSecret} = await response.json();
+          // // Render the Payment Element using the clientSecret
+          // const options = {
+          //   clientSecret: clientSecret,
+          //   // Fully customizable with appearance API.
+          //   // appearance: {/*...*/},
+          // };
+
+          // // Set up Stripe.js and Elements to use in checkout form, passing the client secret obtained in step 2
+          // const elements = stripe.elements(options);
+
+          // // Create and mount the Payment Element
+          // const paymentElement = elements.create('payment');
+          // paymentElement.mount('#payment-element');
         }
       },
       created() {
