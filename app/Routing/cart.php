@@ -15,3 +15,4 @@ $router->map("GET", "/mvc/cart/checkout", "App\Controllers\CartController@checko
 
 //Stripe response
 $router->map("GET", "/mvc/cart/stripe-success", "App\Controllers\CartController@stripeSuccess", "stripe_success");
+$router->map("GET", "/mvc/cart/stripe-cancel", "App\Controllers\CartController@stripeCancel", "stripe_cancel");
