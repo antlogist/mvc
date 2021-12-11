@@ -5,7 +5,7 @@
 @section("data-page-id", "cart")
 
 @section("stripe-checkout")
-<script src="https://js.stripe.com/v3/"></script>
+
 @endsection
 
 @section("content")
