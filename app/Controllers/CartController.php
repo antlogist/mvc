@@ -141,22 +141,6 @@ class CartController extends BaseController {
     }
   }
 
-  function checkout() {
-
-    if (!isAuthenticated) {
-      echo json_encode(["error" => "Something went wrong"]);
-      exit;
-    }
-
-    $intent = \Stripe\PaymentIntent::create([
-      'amount' => convertMoneyToCents(Session::get("cartTotal")),
-      'currency' => 'eur',
-      'payment_method_types' => ['card']
-    ]);
-
-    echo json_encode(array('client_secret' => $intent->client_secret));
-  }
-
   function createCheckoutSession() {
 
     if (!isAuthenticated) {
