@@ -10,4 +10,5 @@ require_once __DIR__."/../../vendor/autoload.php";
 $dotenv = Dotenv\Dotenv::createImmutable(BASE_PATH);
 $dotenv->safeLoad();
 
+//Stripe included
 require_once __DIR__ . '/_stripe.php';
