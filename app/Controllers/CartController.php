@@ -5,6 +5,7 @@ use App\Classes\Session;
 use App\Classes\Cart;
 use App\Classes\Request;
 use App\Classes\CSRFToken;
+use App\Classes\Mail;
 use App\Models\Product;
 use App\Models\Order;
 use App\Models\Payment;
@@ -197,7 +198,9 @@ class CartController extends BaseController {
       $request = Request::get("get");
       if ($request->stripe_session == Session::get("stripe_session")) {
 
-        $result = array();
+        $result["product"]  = array();
+        $result["order_no"] = array();
+        $result["total"]    = array();
 
         $order_id = Session::get("stripe_session");
 
@@ -228,7 +231,7 @@ class CartController extends BaseController {
           $item->quantity = $item->quantity - $quantity;
           $item->save();
 
-          array_push($result, [
+          array_push($result["product"], [
             "name" => $item->name,
             "price" => $item->price,
             "total" => $totalPrice,
@@ -243,7 +246,20 @@ class CartController extends BaseController {
           'status' => "paid",
         ]);
 
+        $result["order_no"] = $order_id;
+        $result["total"] = Session::get("cartTotal");
+
+        $data = [
+          "to" => user()->email,
+          "subject" => "Order Confirmation",
+          "view" => "purchase",
+          "name" => user()->fullname,
+          "body" => $result
+        ];
+
         Cart::clear();
+
+        (new Mail())->send($data);
 
         echo json_encode([
           "success" => "Thank you, we have received your payment and now processing your order."
