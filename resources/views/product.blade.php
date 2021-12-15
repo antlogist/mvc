@@ -30,7 +30,8 @@
           <h2>@{{ product.name }}</h2>
           <p>@{{ product.description }}</p>
           <h2>$@{{ product.price }}</h2>
-          <button @click="addToCart(product.id)" class="button alert">Add to cart</button>
+          <button v-if="product.quantity > 0" @click="addToCart(product.id)" class="button alert">Add to cart</button>
+          <button v-else class="button alert">Out of stock</button>
         </div>
       </div>
     </div>
@@ -47,8 +48,11 @@
                 <div class="card-section">
                   <p>@{{ stringLimit(similar.name, 18) }}</p>
                   <a :href="'<?php echo $_SERVER["APP_URL"] ?>/product/' + similar.id" class="button more expanded">More</a>
-                  <a @click="addToCart(similar.id)" class="button cart expanded">
+                  <a v-if="similar.quantity > 0" @click="addToCart(similar.id)" class="button cart expanded">
                     $@{{ similar.price }} - Add to cart
+                  </a>
+                  <a v-else href="javascript:avoid(0)" class="button cart expanded">
+                    Out of stock
                   </a>
                 </div>
               </div>
