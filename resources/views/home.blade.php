@@ -22,8 +22,11 @@
               <div class="card-section">
                 <p>@{{ stringLimit(feature.name, 18) }}</p>
                 <a :href="'<?php echo $_SERVER["APP_URL"] ?>/product/' + feature.id" class="button more expanded">More</a>
-                <button @click.prevent="addToCart(feature.id)" class="button cart expanded">
+                <button v-if="feature.stock > 0" @click.prevent="addToCart(feature.id)" class="button cart expanded">
                   $@{{ feature.price }} - Add to cart
+                </button>
+                <button v-else class="button cart expanded">
+                  Out of stock
                 </button>
               </div>
             </div>
@@ -41,8 +44,11 @@
               <div class="card-section">
                 <p>@{{ stringLimit(product.name, 18) }}</p>
                 <a :href="'<?php echo $_SERVER["APP_URL"] ?>/product/' + product.id" class="button more expanded">More</a>
-                <button @click.prevent="addToCart(product.id)" class="button cart expanded">
+                <button v-for="product.stock > 0" @click.prevent="addToCart(product.id)" class="button cart expanded">
                   $@{{ product.price }} - Add to cart
+                </button>
+                <button v-else class="button cart expanded">
+                  Out of stock
                 </button>
               </div>
             </div>
