@@ -19,7 +19,7 @@
                 Order
               </div>
               <div class="small-9 cell">
-                500
+                {{ $orders }}
               </div>
             </div>
           </div>
@@ -46,7 +46,7 @@
                 Stock
               </div>
               <div class="small-9 cell">
-                500
+                {{ $products }}
               </div>
             </div>
           </div>
@@ -73,7 +73,7 @@
                 Revenue
               </div>
               <div class="small-9 cell">
-                500
+                ${{ number_format($payments, 2) }}
               </div>
             </div>
           </div>
@@ -100,7 +100,7 @@
                 Signup
               </div>
               <div class="small-9 cell">
-                500
+                {{ $users }}
               </div>
             </div>
           </div>
