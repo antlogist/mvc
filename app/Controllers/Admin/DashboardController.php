@@ -9,6 +9,7 @@ use App\Models\Order;
 use App\Models\Product;
 use App\Models\User;
 use App\Models\Payment;
+use Illuminate\Database\Capsule\Manager as Capsule;
 
 class DashboardController extends BaseController {
 
@@ -22,7 +23,23 @@ class DashboardController extends BaseController {
     return view("admin/dashboard", compact('orders', 'products', 'payments', 'users'));
   }
 
-  function get() {
+  function getChartData() {
+
+
+    $revenue = Capsule::table('payments')->select(
+      Capsule::raw('sum(amount) as `amount`'),
+      Capsule::raw("CONCAT(MONTH(created_at), '-', YEAR(created_at)) new_date, YEAR(created_at) year, Month(created_at) month")
+    )->groupby('new_date', 'year', 'month')->get();
+
+    $orders = Capsule::table('orders')->select(
+      Capsule::raw('count(id) as `count`'),
+      Capsule::raw("CONCAT(MONTH(created_at), '-', YEAR(created_at)) new_date, YEAR(created_at) year, Month(created_at) month")
+    )->groupby('new_date', 'year', 'month')->get();
+
+    echo json_encode([
+      'revenues'  => $revenue,
+      'orders'    => $orders
+    ]);
 
   }
 }
