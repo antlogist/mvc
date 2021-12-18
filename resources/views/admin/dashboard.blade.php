@@ -148,7 +148,7 @@
 
             <h4>Monthly Revenue</h4>
 
-            <canvas id="order"></canvas>
+            <canvas id="revenue"></canvas>
 
           </div>
 
