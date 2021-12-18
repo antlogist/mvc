@@ -18,12 +18,12 @@
 
     axios.get("/mvc/admin/charts").then(function(response) {
       response.data.orders.forEach(function(monthly) {
-        orderData.push(monthly.count);
+        orderData.push(monthly.amount);
         orderLabels.push(monthly.new_date);
       });
 
       response.data.revenues.forEach(function(monthly) {
-        revenueData.push(monthly.count);
+        revenueData.push(monthly.amount);
         revenueLabels.push(monthly.new_date);
       });
 
