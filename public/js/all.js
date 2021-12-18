@@ -19042,7 +19042,7 @@ module.exports = function() {
 
     axios.get("/mvc/admin/charts").then(function(response) {
       response.data.orders.forEach(function(monthly) {
-        orderData.push(monthly.amount);
+        orderData.push(monthly.count);
         orderLabels.push(monthly.new_date);
       });
 
