@@ -20,6 +20,9 @@
         MVCSTORE.admin.changeEvent();
         MVCSTORE.admin.delete();
         break;
+      case "adminDashboard":
+        MVCSTORE.admin.dashboard();
+        break;
       case "adminCategories":
         MVCSTORE.admin.update();
         MVCSTORE.admin.delete();

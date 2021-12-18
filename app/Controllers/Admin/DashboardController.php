@@ -5,33 +5,41 @@ namespace App\Controllers\Admin;
 use App\Classes\Session;
 use App\Classes\Request;
 use App\Controllers\BaseController;
+use App\Models\Order;
+use App\Models\Product;
+use App\Models\User;
+use App\Models\Payment;
+use Illuminate\Database\Capsule\Manager as Capsule;
 
 class DashboardController extends BaseController {
 
   function show() {
-    Session::add("admin", "You are welcome!");
 
-    if (Session::has("admin")) {
-      $msg = Session::get("admin");
-    } else {
-      $msg = "Not defined";
-    }
+    $orders = Order::all()->count();
+    $products = Product::all()->count();
+    $users = User::all()->count();
+    $payments = Payment::all()->sum('amount');
 
-    return view("admin/dashboard", ["admin" => $msg]);
+    return view("admin/dashboard", compact('orders', 'products', 'payments', 'users'));
   }
-  
-  function get() {
-    Request::refresh();
-    $data = Request::old("post", "product");
-    var_dump($data);
-    exit;
-    
-//    if (Request::has("post")) {
-//      $request = Request::get("post");
-//      var_dump($request); 
-//    } else {
-//      var_dump("posting doesn't exist");
-//    }
-    
+
+  function getChartData() {
+
+
+    $revenue = Capsule::table('payments')->select(
+      Capsule::raw('sum(amount) as `amount`'),
+      Capsule::raw("CONCAT(MONTH(created_at), '-', YEAR(created_at)) new_date, YEAR(created_at) year, Month(created_at) month")
+    )->groupby('new_date', 'year', 'month')->get();
+
+    $orders = Capsule::table('orders')->select(
+      Capsule::raw('count(id) as `count`'),
+      Capsule::raw("CONCAT(MONTH(created_at), '-', YEAR(created_at)) new_date, YEAR(created_at) year, Month(created_at) month")
+    )->groupby('new_date', 'year', 'month')->get();
+
+    echo json_encode([
+      'revenues'  => $revenue,
+      'orders'    => $orders
+    ]);
+
   }
 }

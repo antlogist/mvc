@@ -2,41 +2,41 @@
 
 //Admin routs
 $router->map("GET", "/mvc/admin", "App\Controllers\Admin\DashboardController@show", "admin_dashboard");
-$router->map("POST", "/mvc/admin", "App\Controllers\Admin\DashboardController@get", "admin_form");
+$router->map("GET", "/mvc/admin/charts", "App\Controllers\Admin\DashboardController@getChartData", "admin_dashboard_charts");
 
 //Product management
-$router->map("GET", "/mvc/admin/product/categories", 
+$router->map("GET", "/mvc/admin/product/categories",
              "App\Controllers\Admin\ProductCategoryController@show", "product_category");
-$router->map("POST", "/mvc/admin/product/categories", 
+$router->map("POST", "/mvc/admin/product/categories",
              "App\Controllers\Admin\ProductCategoryController@store", "create_product_category");
 
-$router->map("POST", "/mvc/admin/product/categories/[i:id]/edit", 
+$router->map("POST", "/mvc/admin/product/categories/[i:id]/edit",
              "App\Controllers\Admin\ProductCategoryController@edit", "edit_product_category");
-$router->map("POST", "/mvc/admin/product/categories/[i:id]/delete", 
+$router->map("POST", "/mvc/admin/product/categories/[i:id]/delete",
              "App\Controllers\Admin\ProductCategoryController@delete", "delete_product_category");
 
 //Subcategories
-$router->map("POST", "/mvc/admin/product/subcategory/create", 
+$router->map("POST", "/mvc/admin/product/subcategory/create",
              "App\Controllers\Admin\SubCategoryController@store", "create_subcategory");
-$router->map("POST", "/mvc/admin/product/subcategory/[i:id]/edit", 
+$router->map("POST", "/mvc/admin/product/subcategory/[i:id]/edit",
              "App\Controllers\Admin\SubCategoryController@edit", "edit_product_subcategory");
-$router->map("POST", "/mvc/admin/product/subcategory/[i:id]/delete", 
+$router->map("POST", "/mvc/admin/product/subcategory/[i:id]/delete",
              "App\Controllers\Admin\SubCategoryController@delete", "delete_product_subcategory");
 
 //Products
-$router->map("GET", "/mvc/admin/product/category/[i:id]/selected", 
+$router->map("GET", "/mvc/admin/product/category/[i:id]/selected",
              "App\Controllers\Admin\ProductController@getSubcategories", "selected_category");
-$router->map("GET", "/mvc/admin/product/create", 
+$router->map("GET", "/mvc/admin/product/create",
              "App\Controllers\Admin\ProductController@showCreateProductForm", "create_product_form");
-$router->map("POST", "/mvc/admin/product/create", 
+$router->map("POST", "/mvc/admin/product/create",
              "App\Controllers\Admin\ProductController@store", "create_product");
 
-$router->map("GET", "/mvc/admin/products", 
+$router->map("GET", "/mvc/admin/products",
              "App\Controllers\Admin\ProductController@show", "show_products");
 
-$router->map("GET", "/mvc/admin/product/[i:id]/edit", 
+$router->map("GET", "/mvc/admin/product/[i:id]/edit",
              "App\Controllers\Admin\ProductController@showEditProductForm", "edit_product_form");
-$router->map("POST", "/mvc/admin/product/edit", 
+$router->map("POST", "/mvc/admin/product/edit",
              "App\Controllers\Admin\ProductController@edit", "edit_product");
-$router->map("POST", "/mvc/admin/product/[i:id]/delete", 
+$router->map("POST", "/mvc/admin/product/[i:id]/delete",
              "App\Controllers\Admin\ProductController@delete", "delete_product");
