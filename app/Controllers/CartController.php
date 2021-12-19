@@ -11,6 +11,13 @@ use App\Models\Order;
 use App\Models\Payment;
 
 class CartController extends BaseController {
+
+  function __construct() {
+    if(!Role::middleware('user') || !Role::middleware('admin')) {
+      Redirect::to('/mvc/login');
+    }
+  }
+
   function show() {
     return view("cart");
   }

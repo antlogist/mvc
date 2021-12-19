@@ -5,6 +5,7 @@ use App\Controllers\BaseController;
 use App\Models\Category;
 use App\Models\SubCategory;
 use App\Classes\Session;
+use App\Classes\Role;
 use App\Classes\Redirect;
 use App\Classes\Request;
 use App\Classes\CSRFToken;
@@ -16,8 +17,13 @@ class ProductCategoryController extends BaseController {
   public $subcategories;
   public $links;
   public $subcategories_links;
-  
+
   function __construct() {
+
+    if(!Role::middleware('admin')) {
+      Redirect::to('/mvc/login');
+    }
+
     //Count category
     $total = Category::all()->count();
     //Count subcategories
@@ -28,7 +34,7 @@ class ProductCategoryController extends BaseController {
     list($this->categories, $this->links) = paginate(3, $total, $this->table_name, $object);
     list($this->subcategories, $this->subcategories_links) = paginate(3, $subTotal, "sub_categories", new SubCategory);
   }
-  
+
   function show() {
     //Return view and create array of vars and data
     return view("admin/products/categories", [
@@ -123,7 +129,7 @@ class ProductCategoryController extends BaseController {
     }
     return null;
   }
-  
+
   function delete($id) {
     if (Request::has("post")) {
       $request = Request::get("post");
@@ -131,18 +137,18 @@ class ProductCategoryController extends BaseController {
       if (CSRFToken::verifyCSRFToken($request->token, false)) {
         //Process form data
         Category::destroy($id);
-        
+
         $subcategories = SubCategory::where("category_id", $id)->get();
         if (count($subcategories)) {
           foreach ($subcategories as $subcategory) {
             $subcategory->delete();
           }
         }
-        
+
         Session::add("success", "Category Deleted");
         Redirect::to($_SERVER["APP_URL"] . "/admin/product/categories");
         exit;
-      } 
+      }
         throw new \Exception("Token mismatch");
       }
     return null;
