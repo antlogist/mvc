@@ -7,6 +7,7 @@ use App\Models\SubCategory;
 use App\Models\Product;
 use App\Classes\Session;
 use App\Classes\UploadFile;
+use App\Classes\Role;
 use App\Classes\Redirect;
 use App\Classes\Request;
 use App\Classes\CSRFToken;
