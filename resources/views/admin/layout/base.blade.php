@@ -10,7 +10,7 @@
 </head>
 
 <body data-page-id="@yield('data-page-id')">
-	
+
 	@include("includes/admin-sidebar")
 
 	<div class="off-canvas-content admin_title_bar" data-off-canvas-content>
