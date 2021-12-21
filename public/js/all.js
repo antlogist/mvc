@@ -18974,12 +18974,13 @@ module.exports = function() {
 //# sourceMappingURL=axios.min.map
 (function() {
   "use strict";
-  
+
   window.MVCSTORE = {
     global: {},
     admin: {},
     homeslider: {},
-    product: {}
+    product: {},
+    products: {}
   }
 })();
 
@@ -19409,6 +19410,13 @@ module.exports = function() {
 
 })();
 
+(function() {
+  "use strict";
+
+  MVCSTORE.products.showAll = function () {
+    console.log("test");
+  }
+})();
 (function () {
     "use strict";
 
@@ -19435,6 +19443,9 @@ module.exports = function() {
       case "home":
         MVCSTORE.homeslider.initCarousel();
         MVCSTORE.homeslider.homePageProducts();
+        break;
+      case "products":
+        MVCSTORE.products.showAll();
         break;
       case "product":
         MVCSTORE.product.details();
