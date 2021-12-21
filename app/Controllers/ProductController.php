@@ -17,6 +17,16 @@ class ProductController extends BaseController {
       return view("products", compact("token"));
     }
 
+    function loadMoreProducts() {
+      $request = Request::get("post");
+      if(CSRFToken::verifyCSRFToken($request->token, false)) {
+        $count = $request->count;
+        $item_per_page = $count + $request->next;
+        $products = Product::where("featured", 0)->skip(0)->take($item_per_page)->get();
+        echo json_encode(["products" => $products, "count" => count($products)]);
+      }
+    }
+
     function get($id) {
       $product = Product::where("id", $id)->with(["category", "subCategory"])->first();
       if($product) {
