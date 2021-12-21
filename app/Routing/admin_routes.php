@@ -44,3 +44,7 @@ $router->map("POST", "/mvc/admin/product/[i:id]/delete",
 //Orders
 $router->map("GET", "/mvc/admin/orders",
              "App\Controllers\Admin\OrderController@show", "orders");
+
+//Payments
+$router->map("GET", "/mvc/admin/payments",
+             "App\Controllers\Admin\PaymentController@show", "payments");
