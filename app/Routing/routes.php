@@ -8,7 +8,9 @@ $router->map("GET", "/mvc/get-products", "App\Controllers\IndexController@getPro
 $router->map("POST", "/mvc/load-more", "App\Controllers\IndexController@loadMoreProducts", "load_more_product");
 
 $router->map("GET", "/mvc/product/[i:id]", "App\Controllers\ProductController@show", "product");
+$router->map("GET", "/mvc/products", "App\Controllers\ProductController@showAll", "products");
 $router->map("GET", "/mvc/product-details/[i:id]", "App\Controllers\ProductController@get", "product_details");
+$router->map("POST", "/mvc/product/load-more", "App\Controllers\ProductController@loadMoreProducts", "load_more_products");
 
 //Cart routs
 require_once __DIR__ . "/cart.php";
