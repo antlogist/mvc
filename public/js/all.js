@@ -19027,6 +19027,7 @@ module.exports = function() {
 
   MVCSTORE.admin.dashboard = function () {
     charts();
+    setInterval(charts, 10000);
   };
 
   function charts() {
