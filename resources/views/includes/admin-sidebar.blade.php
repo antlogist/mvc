@@ -16,7 +16,7 @@
 		<li><a href="<?php echo $_SERVER["APP_URL"] ?>/admin/products"><i class="fa fa-edit fa-fw"></i> Manage Products</a></li>
 		<li><a href="<?php echo $_SERVER["APP_URL"] ?>/admin/product/categories"><i class="fa fa-compress fa-fw"></i> Categories</a></li>
 		<li><a href="<?php echo $_SERVER["APP_URL"] ?>/admin/orders"><i class="fa fa-shopping-cart fa-fw"></i> View Orders</a></li>
-		<li><a href="<?php echo $_SERVER["APP_URL"] ?>/admin/users/payments"><i class="fa fa-money fa-fw"></i> Payments</a></li>
+		<li><a href="<?php echo $_SERVER["APP_URL"] ?>/admin/payments"><i class="fa fa-money fa-fw"></i> Payments</a></li>
 		<li><a href="<?php echo $_SERVER["APP_URL"] ?>/logout"><i class="fa fa-sign-out fa-fw"></i> Logout</a></li>
 	</ul>
 	<!-- /Menu -->
