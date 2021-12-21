@@ -10,6 +10,9 @@
         MVCSTORE.homeslider.initCarousel();
         MVCSTORE.homeslider.homePageProducts();
         break;
+      case "products":
+        MVCSTORE.products.showAll();
+        break;
       case "product":
         MVCSTORE.product.details();
         break;

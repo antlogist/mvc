@@ -14,7 +14,7 @@
 
     <div class="top-bar-left text-left">
       <ul class="dropdown menu vertical medium-horizontal">
-        <li><a href="#">MVC Products</a> </li>
+        <li><a href="<?php echo $_SERVER["APP_URL"] ?>/products">MVC Products</a> </li>
         @if(count($categories))
         <li>
           <a href="#">Categories</a>

@@ -4,14 +4,29 @@ namespace App\Controllers;
 use App\Models\Product;
 use App\Classes\Request;
 use App\Classes\CSRFToken;
-  
+
 class ProductController extends BaseController {
 	function show($id) {
       $token = CSRFToken::_token();
       $product = Product::where("id", $id)->first();
       return view("product", compact("token", "product"));
     }
-  
+
+    function showAll() {
+      $token = CSRFToken::_token();
+      return view("products", compact("token"));
+    }
+
+    function loadMoreProducts() {
+      $request = Request::get("post");
+      if(CSRFToken::verifyCSRFToken($request->token, false)) {
+        $count = $request->count;
+        $item_per_page = $count + $request->next;
+        $products = Product::where("featured", 0)->skip(0)->take($item_per_page)->get();
+        echo json_encode(["products" => $products, "count" => count($products)]);
+      }
+    }
+
     function get($id) {
       $product = Product::where("id", $id)->with(["category", "subCategory"])->first();
       if($product) {

@@ -1,10 +1,11 @@
 (function() {
   "use strict";
-  
+
   window.MVCSTORE = {
     global: {},
     admin: {},
     homeslider: {},
-    product: {}
+    product: {},
+    products: {}
   }
 })();

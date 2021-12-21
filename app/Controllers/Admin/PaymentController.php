@@ -2,6 +2,8 @@
 namespace App\Controllers\Admin;
 
 use App\Models\Payment;
+use App\Classes\Role;
+use App\Classes\Redirect;
 
 class PaymentController {
 
@@ -10,6 +12,11 @@ class PaymentController {
   public $table_name = "payments";
 
   function __construct() {
+
+    if(!Role::middleware('admin')) {
+      Redirect::to('/mvc/login');
+    }
+
     $total = Payment::all()->count();
 
     //Assign variables to the result of paginate function from helper
