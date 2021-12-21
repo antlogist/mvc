@@ -2,6 +2,8 @@
 namespace App\Controllers\Admin;
 
 use App\Models\Order;
+use App\Classes\Role;
+use App\Classes\Redirect;
 
 class OrderController {
 
@@ -10,6 +12,11 @@ class OrderController {
   public $table_name = "orders";
 
   function __construct() {
+
+    if(!Role::middleware('admin')) {
+      Redirect::to('/mvc/login');
+    }
+
     $total = Order::all()->count();
 
     //Assign variables to the result of paginate function from helper
