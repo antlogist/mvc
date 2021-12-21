@@ -13,7 +13,7 @@ class OrderController {
     $total = Order::all()->count();
 
     //Assign variables to the result of paginate function from helper
-    list($this->orders, $this->links) = paginate(3, $total, $this->table_name, new Order);
+    list($this->orders, $this->links) = paginate(4, $total, $this->table_name, new Order);
 
   }
 
