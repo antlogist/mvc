@@ -2,6 +2,7 @@
 namespace App\Controllers;
 
 use App\Models\Product;
+use App\Models\SubCategory;
 use App\Classes\Request;
 use App\Classes\CSRFToken;
 
@@ -15,6 +16,13 @@ class ProductController extends BaseController {
     function showAll() {
       $token = CSRFToken::_token();
       return view("products", compact("token"));
+    }
+
+    function showSubCategory($slug) {
+      $token = CSRFToken::_token();
+      $id = SubCategory::where("slug", $slug)->first()->id;
+      $products = Product::where("sub_category_id", $id)->get();
+      return view("subcategory", compact("token", "products"));
     }
 
     function loadMoreProducts() {
