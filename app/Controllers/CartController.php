@@ -4,6 +4,8 @@ namespace App\Controllers;
 use App\Classes\Session;
 use App\Classes\Cart;
 use App\Classes\Request;
+use App\Classes\Role;
+use App\Classes\Redirect;
 use App\Classes\CSRFToken;
 use App\Classes\Mail;
 use App\Models\Product;
@@ -11,12 +13,6 @@ use App\Models\Order;
 use App\Models\Payment;
 
 class CartController extends BaseController {
-
-  function __construct() {
-    if(!Role::middleware('user') || !Role::middleware('admin')) {
-      Redirect::to('/mvc/login');
-    }
-  }
 
   function show() {
     return view("cart");
