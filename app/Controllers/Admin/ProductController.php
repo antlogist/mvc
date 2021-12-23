@@ -135,6 +135,7 @@ class ProductController extends BaseController {
       $request = Request::get("post");
       //Token validation
       if (CSRFToken::verifyCSRFToken($request->token, false)) {
+
         //Validation rules
         $rules = [
           "name" => ["required" => true, "minLength" => 3, "maxLength" => 70, "string" => true],
@@ -154,7 +155,7 @@ class ProductController extends BaseController {
 
         $file_error = [];
 
-        if (isset($file->productImage->name) && !UploadFile::isImage($filename)){
+        if (isset($file->productImage->name) && $file->productImage->name != "" && !UploadFile::isImage($filename)){
           $file_error["productImage"] = ["The file is not an image, please try again!"];
         }
 
