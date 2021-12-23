@@ -12,6 +12,9 @@ $router->map("GET", "/mvc/products", "App\Controllers\ProductController@showAll"
 $router->map("GET", "/mvc/product-details/[i:id]", "App\Controllers\ProductController@get", "product_details");
 $router->map("POST", "/mvc/product/load-more", "App\Controllers\ProductController@loadMoreProducts", "load_more_products");
 
+//Subcategory
+$router->map("GET", "/mvc/product-subcategory/[*:slug]", "App\Controllers\ProductController@showSubCategory", "product_subcategory");
+
 //Cart routs
 require_once __DIR__ . "/cart.php";
 
