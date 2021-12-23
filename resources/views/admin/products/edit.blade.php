@@ -9,7 +9,7 @@
 
   @include("includes.message")
 
-  <form method="post" action="<?php echo $_SERVER["APP_URL"] ?>/admin/product/edit" enctype="multipart/form-data">
+  <form method="post" action="<?php echo $_SERVER["APP_URL"] ?>/admin/product/<?php echo $product->id ?>/edit" enctype="multipart/form-data">
     <div class="grid-x grid-margin-x expanded">
 
       <!--Product name - text input-->
@@ -92,7 +92,7 @@
 
     </div>
   </form>
-  
+
   <!--Delete button-->
   <div class="small-12 cell">
     <table data-form="deleteForm">
@@ -107,7 +107,7 @@
     </table>
   </div>
   <!--/Delete button-->
-  
+
 </div>
 @include("includes.delete-modal")
 @endsection
