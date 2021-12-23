@@ -26,7 +26,7 @@
               <ul class="menu sub vertical">
                 @foreach($category->subCategories as $subCategory)
                 <li>
-                  <a href="#">
+                  <a href="<?php echo $_SERVER["APP_URL"] . "/product-subcategory/" .  $subCategory->slug ?>">
                     {{ $subCategory->name }}
                   </a>
                 </li>
