@@ -23,10 +23,11 @@ class DashboardController extends BaseController {
 
   function show() {
 
-    $orders = Order::all()->count();
+    $orders = Capsule::table('orders')->count(Capsule::raw('DISTINCT order_no'));
+    //$orders = Order::all()->count();
     $products = Product::all()->count();
     $users = User::all()->count();
-    $payments = Payment::all()->sum('amount');
+    $payments = Payment::all()->sum('amount') / 100;
 
     return view("admin/dashboard", compact('orders', 'products', 'payments', 'users'));
   }
@@ -35,7 +36,7 @@ class DashboardController extends BaseController {
 
 
     $revenue = Capsule::table('payments')->select(
-      Capsule::raw('sum(amount) as `amount`'),
+      Capsule::raw('sum(amount) / 100 as `amount`'),
       Capsule::raw("CONCAT(MONTH(created_at), '-', YEAR(created_at)) new_date, YEAR(created_at) year, Month(created_at) month")
     )->groupby('new_date', 'year', 'month')->get();
 
