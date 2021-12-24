@@ -19268,10 +19268,40 @@ module.exports = function() {
           }).catch(function (error) {
               console.log(error);
           })
+        },
+        paypalCheckout() {
+          if(this.authenticated) {
+            paypal.Buttons({
+              style: {
+                layout: 'vertical',
+                color:  'blue',
+                shape:  'rect',
+                label:  'paypal'
+              },
+              createOrder: function(data, actions) {
+                // Set up the transaction
+                return actions.order.create({
+                  purchase_units: [{
+                    amount: {
+                      value: app.amountInCents / 100
+                    }
+                  }]
+                });
+              }
+            }).render('#paypal-button-container');
+          }
         }
       },
       created() {
         this.displayItems(2000);
+
+      },
+      watch: {
+        authenticated: function(val) {
+          if(val) {
+            this.paypalCheckout();
+          }
+        }
       }
     });
   };

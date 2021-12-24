@@ -8,11 +8,6 @@
 
 @endsection
 
-
-@section('paypal-checkout')
-    <script src="https://www.paypal.com/sdk/js?client-id=<?php echo $_SERVER['PAYPAL_CLIENT_ID'] ?>"></script>
-@endsection
-
 @section("content")
 <div class="shopping_cart" id="shoppingCart">
 
@@ -122,10 +117,22 @@
               data-stripe-key="{{ \App\Classes\Session::get('publishable_key') }}">
             </span>
           </div>
-
         </div>
       </div>
     </div>
   </section>
+
+  <div class="grid-container">
+    <div class="small-up-12">
+      <div class="text-right">
+        <div id="paypal-button-container"></div>
+      </div>
+    </div>
+  </div>
+
 </div>
+
+@section('paypal-checkout')
+    <script src="https://www.paypal.com/sdk/js?client-id=<?php echo $_SERVER['PAYPAL_CLIENT_ID'] ?>&components=buttons"></script>
+@endsection
 @stop
