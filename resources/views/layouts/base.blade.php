@@ -9,6 +9,7 @@
   <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
   <script src="https://use.fontawesome.com/bd91b9f588.js"></script>
   @yield("stripe-checkout")
+  @yield("paypal-checkout")
 </head>
 
 <body data-page-id="@yield('data-page-id')">

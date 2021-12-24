@@ -8,6 +8,11 @@
 
 @endsection
 
+
+@section('paypal-checkout')
+    <script src="https://www.paypal.com/sdk/js?client-id=<?php echo $_SERVER['PAYPAL_CLIENT_ID'] ?>"></script>
+@endsection
+
 @section("content")
 <div class="shopping_cart" id="shoppingCart">
 
