@@ -124,7 +124,7 @@
 
   <div class="grid-container">
     <div class="small-up-12">
-      <div class="text-right">
+      <div class="text-center">
         <div id="paypal-button-container"></div>
       </div>
     </div>
