@@ -13,3 +13,6 @@ $router->map("POST", "/mvc/cart/create-checkout-session", "App\Controllers\CartC
 //Stripe response
 $router->map("GET", "/mvc/cart/stripe-success", "App\Controllers\CartController@stripeSuccess", "stripe_success");
 $router->map("GET", "/mvc/cart/stripe-cancel", "App\Controllers\CartController@stripeCancel", "stripe_cancel");
+
+//Paypal transaction complete
+$router->map("POST", "/mvc/cart/paypal-transaction-complete", "App\Controllers\PaypalController@getOrder", "paypal_transaction_complete");

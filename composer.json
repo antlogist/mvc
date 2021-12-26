@@ -12,7 +12,8 @@
 	"illuminate/database": "^5.4",
 	"phpmailer/phpmailer": "^6.5",
     "voku/pagination": "^4.0",
-    "stripe/stripe-php": "^7.100"
+    "stripe/stripe-php": "^7.100",
+    "paypal/paypal-checkout-sdk": "1.0.1"
   },
  "require-dev": {
 	"filp/whoops": "^2.14"
