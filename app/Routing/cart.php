@@ -15,4 +15,4 @@ $router->map("GET", "/mvc/cart/stripe-success", "App\Controllers\CartController@
 $router->map("GET", "/mvc/cart/stripe-cancel", "App\Controllers\CartController@stripeCancel", "stripe_cancel");
 
 //Paypal transaction complete
-$router->map("POST", "/mvc/cart/paypal-transaction-complete", "App\Controllers\CartController@paypalTransactionComplete", "paypal_transaction_complete");
+$router->map("POST", "/mvc/cart/paypal-transaction-complete", "App\Controllers\PaypalController@getOrder", "paypal_transaction_complete");
