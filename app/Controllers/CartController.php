@@ -11,8 +11,12 @@ use App\Classes\Mail;
 use App\Models\Product;
 use App\Models\Order;
 use App\Models\Payment;
+use Sample\PayPalClient;
+use PayPalCheckoutSdk\Orders\OrdersGetRequest;
 
 class CartController extends BaseController {
+
+  protected $paypalToken = "";
 
   function show() {
     return view("cart");
@@ -275,5 +279,38 @@ class CartController extends BaseController {
 
   function stripeCancel() {
     return view("stripe-cancel");
+  }
+
+  function getPaypalToken() {
+
+    $curl = curl_init();
+    curl_setopt_array($curl, array(
+    CURLOPT_URL => "https://api-m.sandbox.paypal.com/v1/oauth2/token",
+    CURLOPT_RETURNTRANSFER => true,
+    CURLOPT_CUSTOMREQUEST => "POST",
+    CURLOPT_USERPWD => $_SERVER['PAYPAL_CLIENT_ID'].":".$_SERVER['PAYPAL_SECRET'],
+    CURLOPT_POSTFIELDS => "grant_type=client_credentials",
+    CURLOPT_HTTPHEADER => array(
+      "Accept: application/json",
+      "Accept-Language: en_US"
+      ),
+    ));
+
+    $result= curl_exec($curl);
+
+    $array=json_decode($result, true);
+    $token=$array['access_token'];
+
+    $this->paypalToken = $token;
+    curl_close($curl);
+  }
+
+  function createPayment() {
+    $this->getPaypalToken();
+    echo $this->paypalToken;
+  }
+
+  function executePayment() {
+
   }
 }
