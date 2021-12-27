@@ -126,6 +126,7 @@
     <div class="small-up-12">
       <div class="text-center">
         <div id="paypal-button-container"></div>
+        <div id="paypalInfo" data-app-env="<?php echo $_SERVER['APP_ENV']; ?>" data-app-baseurl="<?php echo $_SERVER['APP_URL']; ?>"></div>
       </div>
     </div>
   </div>
@@ -133,6 +134,6 @@
 </div>
 
 @section('paypal-checkout')
-    <script src="https://www.paypal.com/sdk/js?client-id=<?php echo $_SERVER['PAYPAL_CLIENT_ID'] ?>&components=buttons"></script>
+    <script src="https://www.paypal.com/sdk/js?client-id=<?php echo $_SERVER['PAYPAL_CLIENT_ID'] ?>&intent=authorize"></script>
 @endsection
 @stop
