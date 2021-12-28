@@ -17,6 +17,7 @@ use PayPalCheckoutSdk\Orders\OrdersGetRequest;
 class CartController extends BaseController {
 
   protected $paypalToken = "";
+  protected $paypalStatus = "";
 
   function show() {
     return view("cart");
@@ -303,14 +304,124 @@ class CartController extends BaseController {
 
     $this->paypalToken = $token;
     curl_close($curl);
+
   }
 
-  function createPayment() {
-    $this->getPaypalToken();
-    echo $this->paypalToken;
+  function orderDetailsPaypal($orderID, $authorizationID) {
+
+    $curl = curl_init();
+    curl_setopt_array($curl, array(
+    CURLOPT_URL => "https://api-m.sandbox.paypal.com/v2/checkout/orders/" . $orderID,
+    CURLOPT_RETURNTRANSFER => true,
+    CURLOPT_CUSTOMREQUEST => "GET",
+    CURLOPT_HTTPHEADER => array(
+      "Content-Type: application/json",
+      "Authorization: Bearer {$this->paypalToken}"
+      ),
+    ));
+
+    $result= curl_exec($curl);
+
+    $array=json_decode($result, true);
+
+    $status=$array['status'];
+
+    $this->paypalStatus = $status;
+
+    curl_close($curl);
+
   }
 
-  function executePayment() {
+  function paypalSuccess() {
+    return view("paypal-success");
+  }
+
+  function paypalCancel() {
+    return view("paypal-cancel");
+  }
+
+  function paypalCompletePayment() {
+
+    if (Request::has("post")) {
+      $request = Request::get("post");
+      if ($request->orderID === "") {
+        throw new \Exception("Malicious Activity");
+      }
+
+      $this->getPaypalToken();
+
+      $this->orderDetailsPaypal($request->orderID, $request->authorizationID);
+
+      if( $this->paypalStatus  == "COMPLETED" ) {
+        $result["product"]  = array();
+        $result["order_no"] = array();
+        $result["total"]    = array();
+
+        $order_id = $request->orderID;
+
+        foreach($_SESSION["user_cart"] as $cart_items) {
+
+          $productId = $cart_items["product_id"];
+          $quantity = $cart_items["quantity"];
+          $item = Product::where("id", $productId)->first();
+
+          if(!$item) {
+            continue;
+          }
+
+          $totalPrice = $item->price * $quantity;
+          $totalPrice = number_format($totalPrice, 2);
+
+          //store info
+          Order::create([
+            "user_id" => user()->id,
+            "product_id" => $productId,
+            "unit_price" => $item->price,
+            "status" => "Pending",
+            "quantity" => $quantity,
+            "total" => $totalPrice,
+            "order_no" => $order_id
+          ]);
+
+          $item->quantity = $item->quantity - $quantity;
+          $item->save();
+
+          array_push($result["product"], [
+            "name" => $item->name,
+            "price" => $item->price,
+            "total" => $totalPrice,
+            "quantity" => $quantity,
+          ]);
+        }
+
+        Payment::create([
+          'user_id' => user()->id,
+          'order_no' => $order_id,
+          'amount' => convertMoneyToCents(Session::get("cartTotal")),
+          'status' => "paid",
+        ]);
+
+        $result["order_no"] = $order_id;
+        $result["total"] = Session::get("cartTotal");
+
+        $data = [
+          "to" => user()->email,
+          "subject" => "Order Confirmation",
+          "view" => "purchase",
+          "name" => user()->fullname,
+          "body" => $result
+        ];
+
+        Cart::clear();
+
+        (new Mail())->send($data);
+
+        echo $_SERVER['APP_URL'] . "/cart/paypal-success";
+      } else {
+        echo $_SERVER['APP_URL'] . "/cart/paypal-cancel";
+      }
+
+    }
 
   }
 }

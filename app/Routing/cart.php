@@ -15,5 +15,6 @@ $router->map("GET", "/mvc/cart/stripe-success", "App\Controllers\CartController@
 $router->map("GET", "/mvc/cart/stripe-cancel", "App\Controllers\CartController@stripeCancel", "stripe_cancel");
 
 //Paypal
-$router->map("GET", "/mvc/cart/paypal-create-payment", "App\Controllers\CartController@createPayment", "paypal_create_payment");
-$router->map("POST", "/mvc/cart/paypal-execute-payment", "App\Controllers\CartController@executePayment", "paypal_execute_payment");
+$router->map("POST", "/mvc/cart/paypal-complete-payment", "App\Controllers\CartController@paypalCompletePayment", "paypal_complete_payment");
+$router->map("GET", "/mvc/cart/paypal-success", "App\Controllers\CartController@paypalSuccess", "paypal_success");
+$router->map("GET", "/mvc/cart/paypal-cancel", "App\Controllers\CartController@paypalCancel", "paypal_cancel");
