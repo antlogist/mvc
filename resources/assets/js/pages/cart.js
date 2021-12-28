@@ -75,18 +75,28 @@
                 return actions.order.create({
                   purchase_units: [{
                     amount: {
-                      value: app.amountInCents / 100,
-                      currency: 'RUR'
+                      value: app.amountInCents / 100
                     }
                   }]
                 });
               },
               onApprove: function(data, actions) {
-                return actions.order.capture().then(function(orderData) {
-                  // Successful capture! For dev/demo purposes:
-                  console.log('Capture result', orderData, JSON.stringify(orderData, null, 2));
-                  var transaction = orderData.purchase_units[0].payments.captures[0];
-                  alert('Transaction '+ transaction.status + ': ' + transaction.id + '\n\nSee console for all available details');
+
+                // Authorize the transaction
+                actions.order.authorize().then(function(authorization) {
+
+                  // Get the authorization id
+                  var authorizationID = authorization.purchase_units[0]
+                    .payments.authorizations[0].id
+
+                  // Call your server to validate and capture the transaction
+                  const postData = $.param({ orderID: data.orderID,  authorizationID: authorizationID});
+                  axios.post('/mvc/cart/paypal-complete-payment', postData).then(function (response) {
+                    console.log(response["data"]);
+                    window.location.replace(response["data"]);
+                  }).catch(function (error) {
+                      console.log(error);
+                  })
                 });
               }
             }).render('#paypal-button-container');
