@@ -15,5 +15,6 @@ class User extends Model {
   public $timestamps = true;
   protected $fillable = ['username', 'fullname', 'email', 'password', 'address', 'role'];
   protected $dates = ["deleted_at"];
+  protected $hidden = ["password", "deleted_at"];
 
 }
